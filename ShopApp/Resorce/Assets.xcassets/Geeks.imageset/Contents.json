@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "кофейня Geeks.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
