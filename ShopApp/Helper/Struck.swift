@@ -12,5 +12,5 @@ struct Coffee {
 
 struct Cellitem {
     
-    var image: String
+    var type: String
 }
