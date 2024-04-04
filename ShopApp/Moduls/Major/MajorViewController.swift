@@ -1,5 +1,6 @@
 
 import UIKit
+import SnapKit
 
 class MajorViewController: UIViewController {
     
@@ -56,24 +57,24 @@ class MajorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigtionItem()
         view.backgroundColor = .systemBackground
-        setupNavigationItem()
         setupConstreints()
         
         selectedIndex = IndexPath(item: 0, section: 0)
     }
     
-    private func setupNavigationItem() {
-        navigationItem.title = "Меню"
-        navigationItem.hidesBackButton = true
-        let rigtButton = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.rightBarButtonItem = rigtButton
-        
-    }
+    private func setupNavigtionItem() {
+            navigationItem.title = "Меню"
+            let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
+                                                     style: .plain,
+                                                     target: self,
+                                                     action: .none)
+            navigationItem.rightBarButtonItem = rightBarButtonItem
+            navigationController?.navigationBar.tintColor = .black
+        }
     
-    @objc func settingsButtonTapped() {
-        
-    }
+    
     
     private func setupConstreints() {
         
@@ -161,3 +162,5 @@ extension MajorViewController: UITableViewDelegate {
         return CGFloat(cellHeight + topPadding + bottomPadding)
     }
 }
+
+

@@ -25,6 +25,12 @@
 		63856FBE2BBD4CEF00969D07 /* Struck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FBD2BBD4CEF00969D07 /* Struck.swift */; };
 		63856FC42BBD6BDD00969D07 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FC32BBD6BDD00969D07 /* CustomTableViewCell.swift */; };
 		63856FC62BBE719200969D07 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FC52BBE719200969D07 /* CustomCollectionViewCell.swift */; };
+		63856FC92BBEADC300969D07 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FC82BBEADC300969D07 /* PlusButton.swift */; };
+		63856FCC2BBEAFD400969D07 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FCB2BBEAFD400969D07 /* CustomTabBarController.swift */; };
+		63856FCE2BBEB01500969D07 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FCD2BBEB01500969D07 /* CustomTabBar.swift */; };
+		63856FD32BBEDA7800969D07 /* BagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD22BBEDA7800969D07 /* BagVC.swift */; };
+		63856FD62BBEDAD100969D07 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD52BBEDAD100969D07 /* ProfileVC.swift */; };
+		63856FD92BBEDD7500969D07 /* CompasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD82BBEDD7500969D07 /* CompasVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +53,12 @@
 		63856FBD2BBD4CEF00969D07 /* Struck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struck.swift; sourceTree = "<group>"; };
 		63856FC32BBD6BDD00969D07 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		63856FC52BBE719200969D07 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		63856FC82BBEADC300969D07 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		63856FCB2BBEAFD400969D07 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		63856FCD2BBEB01500969D07 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		63856FD22BBEDA7800969D07 /* BagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagVC.swift; sourceTree = "<group>"; };
+		63856FD52BBEDAD100969D07 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		63856FD82BBEDD7500969D07 /* CompasVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompasVC.swift; sourceTree = "<group>"; };
 		AA6166D4BC430CBA71DD3CB3 /* Pods-ShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.release.xcconfig"; sourceTree = "<group>"; };
 		E17B8A7A4C542500B968525D /* Pods-ShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F347D84B91EB79F4A594DE0B /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +114,8 @@
 		63856F8D2BBD2F9800969D07 /* ShopApp */ = {
 			isa = PBXGroup;
 			children = (
+				63856FCA2BBEAFB500969D07 /* NavigationModule */,
+				63856FC72BBEAD9A00969D07 /* UI */,
 				63856FB82BBD378E00969D07 /* Helper */,
 				63856FA42BBD320B00969D07 /* Moduls */,
 				63856FA32BBD31FE00969D07 /* App */,
@@ -132,6 +146,9 @@
 		63856FA42BBD320B00969D07 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
+				63856FD72BBEDD4300969D07 /* Compas */,
+				63856FD42BBEDAB900969D07 /* Profile */,
+				63856FD12BBEDA4C00969D07 /* Bag */,
 				63856FA92BBD34F600969D07 /* Entrance */,
 				63856FAA2BBD351200969D07 /* Phone */,
 				63856FB12BBD35D300969D07 /* Major */,
@@ -178,6 +195,47 @@
 				63856FBD2BBD4CEF00969D07 /* Struck.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		63856FC72BBEAD9A00969D07 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				63856FC82BBEADC300969D07 /* PlusButton.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		63856FCA2BBEAFB500969D07 /* NavigationModule */ = {
+			isa = PBXGroup;
+			children = (
+				63856FCB2BBEAFD400969D07 /* CustomTabBarController.swift */,
+				63856FCD2BBEB01500969D07 /* CustomTabBar.swift */,
+			);
+			path = NavigationModule;
+			sourceTree = "<group>";
+		};
+		63856FD12BBEDA4C00969D07 /* Bag */ = {
+			isa = PBXGroup;
+			children = (
+				63856FD22BBEDA7800969D07 /* BagVC.swift */,
+			);
+			path = Bag;
+			sourceTree = "<group>";
+		};
+		63856FD42BBEDAB900969D07 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				63856FD52BBEDAD100969D07 /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		63856FD72BBEDD4300969D07 /* Compas */ = {
+			isa = PBXGroup;
+			children = (
+				63856FD82BBEDD7500969D07 /* CompasVC.swift */,
+			);
+			path = Compas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,10 +352,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63856FD62BBEDAD100969D07 /* ProfileVC.swift in Sources */,
+				63856FD32BBEDA7800969D07 /* BagVC.swift in Sources */,
 				63856FB72BBD366600969D07 /* MajorModel.swift in Sources */,
 				63856FC62BBE719200969D07 /* CustomCollectionViewCell.swift in Sources */,
 				63856F932BBD2F9800969D07 /* EntranceViewController.swift in Sources */,
 				63856FAE2BBD356400969D07 /* PhoneController.swift in Sources */,
+				63856FCE2BBEB01500969D07 /* CustomTabBar.swift in Sources */,
 				63856FAC2BBD353000969D07 /* PhoneControllerView.swift in Sources */,
 				63856F8F2BBD2F9800969D07 /* AppDelegate.swift in Sources */,
 				63856FB32BBD361C00969D07 /* MajorViewController.swift in Sources */,
@@ -305,10 +366,13 @@
 				63856FB52BBD365900969D07 /* MajorController.swift in Sources */,
 				63856F912BBD2F9800969D07 /* SceneDelegate.swift in Sources */,
 				63856FA82BBD34C800969D07 /* EntranceModel.swift in Sources */,
+				63856FC92BBEADC300969D07 /* PlusButton.swift in Sources */,
+				63856FCC2BBEAFD400969D07 /* CustomTabBarController.swift in Sources */,
 				63856FBE2BBD4CEF00969D07 /* Struck.swift in Sources */,
 				63856FB02BBD357A00969D07 /* PhoneModel.swift in Sources */,
 				63856FBA2BBD37AA00969D07 /* CustomUIColor.swift in Sources */,
 				63856FA62BBD34B100969D07 /* EntranceController.swift in Sources */,
+				63856FD92BBEDD7500969D07 /* CompasVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
