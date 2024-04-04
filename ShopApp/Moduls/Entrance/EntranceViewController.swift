@@ -10,9 +10,7 @@ class EntranceViewController: UIViewController {
         image.image = UIImage(resource: .geeks)
         return image
     }()
-    
-    //=
-    
+        
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Войти", for: .normal)

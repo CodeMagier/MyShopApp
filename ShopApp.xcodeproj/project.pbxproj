@@ -22,6 +22,8 @@
 		63856FB52BBD365900969D07 /* MajorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FB42BBD365900969D07 /* MajorController.swift */; };
 		63856FB72BBD366600969D07 /* MajorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FB62BBD366600969D07 /* MajorModel.swift */; };
 		63856FBA2BBD37AA00969D07 /* CustomUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FB92BBD37AA00969D07 /* CustomUIColor.swift */; };
+		63856FBE2BBD4CEF00969D07 /* Struck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FBD2BBD4CEF00969D07 /* Struck.swift */; };
+		63856FC42BBD6BDD00969D07 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FC32BBD6BDD00969D07 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		63856FB42BBD365900969D07 /* MajorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorController.swift; sourceTree = "<group>"; };
 		63856FB62BBD366600969D07 /* MajorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorModel.swift; sourceTree = "<group>"; };
 		63856FB92BBD37AA00969D07 /* CustomUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIColor.swift; sourceTree = "<group>"; };
+		63856FBD2BBD4CEF00969D07 /* Struck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struck.swift; sourceTree = "<group>"; };
+		63856FC32BBD6BDD00969D07 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		AA6166D4BC430CBA71DD3CB3 /* Pods-ShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.release.xcconfig"; sourceTree = "<group>"; };
 		E17B8A7A4C542500B968525D /* Pods-ShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F347D84B91EB79F4A594DE0B /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +163,7 @@
 				63856FB22BBD361C00969D07 /* MajorViewController.swift */,
 				63856FB42BBD365900969D07 /* MajorController.swift */,
 				63856FB62BBD366600969D07 /* MajorModel.swift */,
+				63856FC32BBD6BDD00969D07 /* CustomTableViewCell.swift */,
 			);
 			path = Major;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				63856FB92BBD37AA00969D07 /* CustomUIColor.swift */,
+				63856FBD2BBD4CEF00969D07 /* Struck.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -291,9 +297,11 @@
 				63856FAC2BBD353000969D07 /* PhoneControllerView.swift in Sources */,
 				63856F8F2BBD2F9800969D07 /* AppDelegate.swift in Sources */,
 				63856FB32BBD361C00969D07 /* MajorViewController.swift in Sources */,
+				63856FC42BBD6BDD00969D07 /* CustomTableViewCell.swift in Sources */,
 				63856FB52BBD365900969D07 /* MajorController.swift in Sources */,
 				63856F912BBD2F9800969D07 /* SceneDelegate.swift in Sources */,
 				63856FA82BBD34C800969D07 /* EntranceModel.swift in Sources */,
+				63856FBE2BBD4CEF00969D07 /* Struck.swift in Sources */,
 				63856FB02BBD357A00969D07 /* PhoneModel.swift in Sources */,
 				63856FBA2BBD37AA00969D07 /* CustomUIColor.swift in Sources */,
 				63856FA62BBD34B100969D07 /* EntranceController.swift in Sources */,
