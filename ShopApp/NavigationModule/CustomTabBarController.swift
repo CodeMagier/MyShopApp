@@ -15,7 +15,7 @@ final class CustomTabBarController: UITabBarController {
     
     private func setupNavigtionItem() {
             navigationItem.title = "Меню"
-            let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
                                                      style: .plain,
                                                      target: self,
                                                      action: .none)
@@ -25,24 +25,20 @@ final class CustomTabBarController: UITabBarController {
     
     private func setupTabItem() {
         
-        let firstVC = MajorViewController()
-        firstVC.tabBarItem.title = "Like"
-        firstVC.tabBarItem.image = UIImage(systemName: "person")
+        let majorVC = MajorViewController()
+        majorVC.tabBarItem.image = UIImage(systemName: "house")
         
-        let secondVC = BagVC()
-        secondVC.tabBarItem.title = "Subscrin"
-        secondVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        let bagVC = BagVC()
+        bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
-        let seconddVC = ProfileVC()
-        seconddVC.tabBarItem.title = "Subscrin"
-        seconddVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        let compassVC = ProfileVC()
+        //seconddVC.tabBarItem.image = UIImage(systemName: "location")
+        compassVC.tabBarItem.image = UIImage(resource: .kompas)
         
-        let secondddVC = CompasVC()
-        secondddVC.tabBarItem.title = "Subscrin"
-        secondddVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        let profileVC = CompassVC()
+        profileVC.tabBarItem.image = UIImage(systemName: "person")
         
-        
-        setViewControllers([firstVC, secondVC, seconddVC,secondddVC], animated: false)
+        setViewControllers([majorVC, bagVC, compassVC, profileVC], animated: false)
     }
     
 }

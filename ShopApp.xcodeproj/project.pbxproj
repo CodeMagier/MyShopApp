@@ -30,7 +30,13 @@
 		63856FCE2BBEB01500969D07 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FCD2BBEB01500969D07 /* CustomTabBar.swift */; };
 		63856FD32BBEDA7800969D07 /* BagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD22BBEDA7800969D07 /* BagVC.swift */; };
 		63856FD62BBEDAD100969D07 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD52BBEDAD100969D07 /* ProfileVC.swift */; };
-		63856FD92BBEDD7500969D07 /* CompasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD82BBEDD7500969D07 /* CompasVC.swift */; };
+		63856FD92BBEDD7500969D07 /* CompassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FD82BBEDD7500969D07 /* CompassVC.swift */; };
+		63856FDB2BBFA55A00969D07 /* BagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FDA2BBFA55A00969D07 /* BagController.swift */; };
+		63856FDD2BBFA58700969D07 /* BagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FDC2BBFA58700969D07 /* BagModel.swift */; };
+		63856FDF2BBFA9C400969D07 /* CompassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FDE2BBFA9C400969D07 /* CompassController.swift */; };
+		63856FE12BBFA9E400969D07 /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FE02BBFA9E400969D07 /* CompassModel.swift */; };
+		63856FE32BBFAA1300969D07 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FE22BBFAA1300969D07 /* ProfileController.swift */; };
+		63856FE52BBFAA3700969D07 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856FE42BBFAA3700969D07 /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +64,13 @@
 		63856FCD2BBEB01500969D07 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		63856FD22BBEDA7800969D07 /* BagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagVC.swift; sourceTree = "<group>"; };
 		63856FD52BBEDAD100969D07 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
-		63856FD82BBEDD7500969D07 /* CompasVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompasVC.swift; sourceTree = "<group>"; };
+		63856FD82BBEDD7500969D07 /* CompassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassVC.swift; sourceTree = "<group>"; };
+		63856FDA2BBFA55A00969D07 /* BagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagController.swift; sourceTree = "<group>"; };
+		63856FDC2BBFA58700969D07 /* BagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagModel.swift; sourceTree = "<group>"; };
+		63856FDE2BBFA9C400969D07 /* CompassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassController.swift; sourceTree = "<group>"; };
+		63856FE02BBFA9E400969D07 /* CompassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
+		63856FE22BBFAA1300969D07 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		63856FE42BBFAA3700969D07 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		AA6166D4BC430CBA71DD3CB3 /* Pods-ShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.release.xcconfig"; sourceTree = "<group>"; };
 		E17B8A7A4C542500B968525D /* Pods-ShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug.xcconfig"; path = "Target Support Files/Pods-ShopApp/Pods-ShopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F347D84B91EB79F4A594DE0B /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,12 +126,12 @@
 		63856F8D2BBD2F9800969D07 /* ShopApp */ = {
 			isa = PBXGroup;
 			children = (
+				63856FA32BBD31FE00969D07 /* App */,
+				63856FA22BBD31ED00969D07 /* Resorce */,
+				63856FA42BBD320B00969D07 /* Moduls */,
 				63856FCA2BBEAFB500969D07 /* NavigationModule */,
 				63856FC72BBEAD9A00969D07 /* UI */,
 				63856FB82BBD378E00969D07 /* Helper */,
-				63856FA42BBD320B00969D07 /* Moduls */,
-				63856FA32BBD31FE00969D07 /* App */,
-				63856FA22BBD31ED00969D07 /* Resorce */,
 				63856F9C2BBD2F9A00969D07 /* Info.plist */,
 			);
 			path = ShopApp;
@@ -146,12 +158,12 @@
 		63856FA42BBD320B00969D07 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				63856FD72BBEDD4300969D07 /* Compas */,
-				63856FD42BBEDAB900969D07 /* Profile */,
-				63856FD12BBEDA4C00969D07 /* Bag */,
 				63856FA92BBD34F600969D07 /* Entrance */,
 				63856FAA2BBD351200969D07 /* Phone */,
 				63856FB12BBD35D300969D07 /* Major */,
+				63856FD12BBEDA4C00969D07 /* Bag */,
+				63856FD72BBEDD4300969D07 /* Compass */,
+				63856FD42BBEDAB900969D07 /* Profile */,
 			);
 			path = Moduls;
 			sourceTree = "<group>";
@@ -218,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				63856FD22BBEDA7800969D07 /* BagVC.swift */,
+				63856FDA2BBFA55A00969D07 /* BagController.swift */,
+				63856FDC2BBFA58700969D07 /* BagModel.swift */,
 			);
 			path = Bag;
 			sourceTree = "<group>";
@@ -226,16 +240,20 @@
 			isa = PBXGroup;
 			children = (
 				63856FD52BBEDAD100969D07 /* ProfileVC.swift */,
+				63856FE22BBFAA1300969D07 /* ProfileController.swift */,
+				63856FE42BBFAA3700969D07 /* ProfileModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		63856FD72BBEDD4300969D07 /* Compas */ = {
+		63856FD72BBEDD4300969D07 /* Compass */ = {
 			isa = PBXGroup;
 			children = (
-				63856FD82BBEDD7500969D07 /* CompasVC.swift */,
+				63856FD82BBEDD7500969D07 /* CompassVC.swift */,
+				63856FDE2BBFA9C400969D07 /* CompassController.swift */,
+				63856FE02BBFA9E400969D07 /* CompassModel.swift */,
 			);
-			path = Compas;
+			path = Compass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,9 +375,11 @@
 				63856FB72BBD366600969D07 /* MajorModel.swift in Sources */,
 				63856FC62BBE719200969D07 /* CustomCollectionViewCell.swift in Sources */,
 				63856F932BBD2F9800969D07 /* EntranceViewController.swift in Sources */,
+				63856FE32BBFAA1300969D07 /* ProfileController.swift in Sources */,
 				63856FAE2BBD356400969D07 /* PhoneController.swift in Sources */,
 				63856FCE2BBEB01500969D07 /* CustomTabBar.swift in Sources */,
 				63856FAC2BBD353000969D07 /* PhoneControllerView.swift in Sources */,
+				63856FE52BBFAA3700969D07 /* ProfileModel.swift in Sources */,
 				63856F8F2BBD2F9800969D07 /* AppDelegate.swift in Sources */,
 				63856FB32BBD361C00969D07 /* MajorViewController.swift in Sources */,
 				63856FC42BBD6BDD00969D07 /* CustomTableViewCell.swift in Sources */,
@@ -370,9 +390,13 @@
 				63856FCC2BBEAFD400969D07 /* CustomTabBarController.swift in Sources */,
 				63856FBE2BBD4CEF00969D07 /* Struck.swift in Sources */,
 				63856FB02BBD357A00969D07 /* PhoneModel.swift in Sources */,
+				63856FDB2BBFA55A00969D07 /* BagController.swift in Sources */,
 				63856FBA2BBD37AA00969D07 /* CustomUIColor.swift in Sources */,
+				63856FDF2BBFA9C400969D07 /* CompassController.swift in Sources */,
 				63856FA62BBD34B100969D07 /* EntranceController.swift in Sources */,
-				63856FD92BBEDD7500969D07 /* CompasVC.swift in Sources */,
+				63856FD92BBEDD7500969D07 /* CompassVC.swift in Sources */,
+				63856FE12BBFA9E400969D07 /* CompassModel.swift in Sources */,
+				63856FDD2BBFA58700969D07 /* BagModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

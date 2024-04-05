@@ -20,10 +20,8 @@ final class CustomTabBar: UITabBar {
     }
     
     private func setupTabBar() {
-//        tintColor = .red
         unselectedItemTintColor = .black
     }
-    
     
     private func setupPlusButton() {
         addSubview(plusButton)

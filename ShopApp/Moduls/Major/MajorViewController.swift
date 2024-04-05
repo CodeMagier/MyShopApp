@@ -57,25 +57,12 @@ class MajorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigtionItem()
         view.backgroundColor = .systemBackground
         setupConstreints()
         
         selectedIndex = IndexPath(item: 0, section: 0)
     }
-    
-    private func setupNavigtionItem() {
-            navigationItem.title = "Меню"
-            let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
-                                                     style: .plain,
-                                                     target: self,
-                                                     action: .none)
-            navigationItem.rightBarButtonItem = rightBarButtonItem
-            navigationController?.navigationBar.tintColor = .black
-        }
-    
-    
-    
+ 
     private func setupConstreints() {
         
         view.addSubview(horizontalCollectionView)
