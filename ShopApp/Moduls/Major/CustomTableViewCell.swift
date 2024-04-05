@@ -62,7 +62,6 @@ class CustomTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(0)
             make.height.width.equalTo(89)
-            make.edges.equalToSuperview()
         }
         
         addSubview(stackView)
