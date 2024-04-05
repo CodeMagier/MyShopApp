@@ -7,7 +7,7 @@ final class CustomTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setValue(customTabBar, forKey: "tabBar")
         setupTabItem()
         setupNavigtionItem()
@@ -31,14 +31,14 @@ final class CustomTabBarController: UITabBarController {
         let bagVC = BagVC()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
-        let compassVC = ProfileVC()
-        //seconddVC.tabBarItem.image = UIImage(systemName: "location")
-        compassVC.tabBarItem.image = UIImage(resource: .kompas)
+        let compassVC = CompassVC()
+        compassVC.tabBarItem.image = UIImage(systemName: "location")
+        //compassVC.tabBarItem.image = UIImage(resource: .kompas)
         
-        let profileVC = CompassVC()
+        let profileVC = ProfileVC()
         profileVC.tabBarItem.image = UIImage(systemName: "person")
         
         setViewControllers([majorVC, bagVC, compassVC, profileVC], animated: false)
     }
-    
+
 }

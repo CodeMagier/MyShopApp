@@ -67,4 +67,7 @@ extension CustomTabBar {
         path.addLine(to: CGPoint(x: 0, y: frame.height))
         return path
     }
+
 }
+
+

@@ -37,7 +37,7 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
-    
+  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
@@ -73,7 +73,7 @@ class CustomTableViewCell: UITableViewCell {
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(coffeeImage.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().offset(-0)
+            make.trailing.equalToSuperview()
         }
     }
     

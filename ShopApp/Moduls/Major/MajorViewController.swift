@@ -4,19 +4,23 @@ import SnapKit
 
 class MajorViewController: UIViewController {
     
-    private let typeOfFood: [Cellitem] = [Cellitem(type: "Кофе"),
-                                          Cellitem(type: "Десерты"),
-                                          Cellitem(type: "Выпечка"),
-                                          Cellitem(type: "Коктейли"),
-                                          Cellitem(type: "Напитки"),
-                                          Cellitem(type: "Еда"),
-                                          Cellitem(type: "Марожное")]
+    private let typeOfFood = [Cellitem(type: "Кофе"),
+                              Cellitem(type: "Десерты"),
+                              Cellitem(type: "Выпечка"),
+                              Cellitem(type: "Коктейли"),
+                              Cellitem(type: "Напитки"),
+                              Cellitem(type: "Еда"),
+                              Cellitem(type: "Марожное")
+    ]
     
-    private var coffee: [Coffee] = [Coffee(image: "1", title: "Капучино", drink: "Кофейный напиток", preis: "130c"),
-                                    Coffee(image: "2", title: "Латте", drink: "Кофейный напиток", preis: "145c"),
-                                    Coffee(image: "3", title: "Американо", drink: "Кофейный напиток", preis: "150c"),
-                                    Coffee(image: "4", title: "Раф", drink: "Кофейный напиток", preis: "170c"),
-                                    Coffee(image: "5", title: "Эспрессо", drink: "Кофейный напиток", preis: "200c")]
+    private let coffee = [Coffee(image: "1", title: "Капучино", drink: "Кофейный напиток", preis: "130c"),
+                          Coffee(image: "2", title: "Латте", drink: "Кофейный напиток", preis: "145c"),
+                          Coffee(image: "3", title: "Американо", drink: "Кофейный напиток", preis: "150c"),
+                          Coffee(image: "4", title: "Раф", drink: "Кофейный напиток", preis: "170c"),
+                          Coffee(image: "5", title: "Эспрессо", drink: "Кофейный напиток", preis: "200c"),Coffee(image: "макко", title: "Макко", drink: "Кофейный напиток", preis: "220с")
+    ]
+    
+    let betailList = [information(image: "капучино", title: "Капучино", price: "140c", description: "Капучино — самый известный кофейный напиток на основе эспрессо. В нём сохраняется баланс: чувствуется вкус эспрессо, но он не преобладает над вкусом молока. Это золотая середина между латте и флэт Уайтом и хороший вариант для первого знакомства с кофе."), information(image: "латте", title: "Латте", price: "140c", description: "Латте — кофейный напиток на основе молока, представляющий собой трёхслойную смесь из молочной пены, молока и кофе эспрессо. Для придания дополнительных вкусовых ощущений пенку латте часто посыпают добавками: корицей, шоколадом или ореховой крошкой. Также можно добавить сироп амаретто."), information(image: "американо", title: "Американо", price: "100c", description: "Американо — это эспрессо с добавлением горячей воды. Допускается разбавление эспрессо водой в соотношении 1:1, 1:2 или 1:4. Классическая пропорция — 1:1, но вы можете приготовить американо так, как вам нравится. Чем больше воды, тем менее концентрированным получится напиток."), information(image: "раф", title: "Раф", price: "170c", description: "кофейный напиток, готовится путём добавления нагретых паром сливок с небольшим количеством пены (0,5 см) в одиночную порцию эспрессо. Часто подаётся с сиропом. Раф популярен в России и странах бывшего СССР. Принципиально похож на латте, но отличается — добавлением ванильного сахара и сливок вместо молока. Появился в конце 1990-х годов."), information(image: "эспрессо", title: "Экспрессо", price: "140c", description: "Эспре́ссо (от итал. espresso) — метод приготовления кофе путём прохождения горячей воды (около 90 °C) под давлением (около 9 бар) через фильтр с молотым кофе. Эспрессо пользуется большой популярностью во всём мире и, прежде всего, на юге Европы — в Италии, Испании и Португалии. Традиционно подается с одним кубиком сахара, без ложки. В процессе приема сахар растворяется не изменяя вкус кофе."), information(image: "раф", title: "Макко", price: "220с", description: "Он включает в себя несколько основных ингредиентов: эспрессо, горячий шоколад или какао и взбитое молоко. Это классический вариант, но некоторые рецепты могут включать дополнительные ингредиенты. Обычно это сахар, ваниль, карамель и различные вкусовые добавки.")]
     
     private lazy var horizontalCollectionView: UICollectionView = {
         var layout = UICollectionViewFlowLayout()
@@ -108,8 +112,9 @@ extension MajorViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedIndex = selectedIndex {
             if let cell = collectionView.cellForItem(at: selectedIndex) as? CustomCollectionViewCell {
-                cell.updateAppearance(isSelected: false)
+                
             }
+        
         }
         
         if let cell = collectionView.cellForItem(at: indexPath) as? CustomCollectionViewCell {
@@ -130,6 +135,16 @@ extension MajorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return coffee.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = betailList[indexPath.row]
+        let detailVC = ВetailView()
+        detailVC.descriptionImageName = item.image
+        detailVC.titleText = item.title
+        detailVC.priceText = item.price
+        detailVC.descriptionText = item.description
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

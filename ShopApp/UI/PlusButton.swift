@@ -28,5 +28,11 @@ final class PlusButton: UIButton {
         layer.shadowOffset = CGSize(width: 0,
                                     height: 5)
         translatesAutoresizingMaskIntoConstraints = false
+        addTarget(self, action: #selector(goToProfileVC), for: .touchUpInside)
+    }
+    
+    @objc func goToProfileVC() {
+
+        
     }
 }

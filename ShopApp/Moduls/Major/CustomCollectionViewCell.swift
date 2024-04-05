@@ -21,7 +21,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         updateAppearance(isSelected: false)
     }
-    
+
     private func setupLabel() {
         contentView.addSubview(titleLabel)
         
