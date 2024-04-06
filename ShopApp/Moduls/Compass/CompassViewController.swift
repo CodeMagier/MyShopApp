@@ -1,7 +1,7 @@
 
 import UIKit
 
-class CompassVC: UIViewController {
+class CompassViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

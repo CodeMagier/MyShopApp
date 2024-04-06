@@ -10,6 +10,8 @@ class CustomTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.tintColor = .label
+        image.layer.cornerRadius = 24
+        image.clipsToBounds = true
         return image
     }()
     
@@ -23,6 +25,7 @@ class CustomTableViewCell: UITableViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -47,11 +50,12 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(coffee: Coffee) {
-        coffeeImage.image = UIImage(named: coffee.image)
-        titleLabel.text = coffee.title
-        drinkLabel.text = coffee.drink
-        preisLabel.text = coffee.preis
+    func setup(product: Product) {
+        
+        coffeeImage.image = UIImage(named: product.image)
+        titleLabel.text = product.title
+        drinkLabel.text = product.drink
+        preisLabel.text = product.preis
         
     }
     
@@ -75,6 +79,14 @@ class CustomTableViewCell: UITableViewCell {
             make.leading.equalTo(coffeeImage.snp.trailing).offset(16)
             make.trailing.equalToSuperview()
         }
+    }
+    
+    func fill(with model: ProductModel) {
+        
+        coffeeImage.image = UIImage(named: model.productImage)
+        titleLabel.text = model.productName
+        drinkLabel.text = model.productDescription
+        preisLabel.text = model.productPrice
     }
     
 }

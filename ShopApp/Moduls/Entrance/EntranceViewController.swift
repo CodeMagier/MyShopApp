@@ -17,6 +17,7 @@ class EntranceViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
+        button.addTarget(EntranceViewController.self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
         return button
     }()
 
@@ -38,12 +39,13 @@ class EntranceViewController: UIViewController {
             make.top.equalTo(geeksImage.snp.bottom).offset(90)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
-        }; entranceButton.addTarget(self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
+        }
     
     }
     
-    @objc func goToPhoneControllerView() {
-        let vc = PhoneControllerView()
+    @objc 
+    private func goToPhoneControllerView() {
+        let vc = PhoneViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 

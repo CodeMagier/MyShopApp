@@ -2,7 +2,7 @@
 import UIKit
 import SnapKit
 
-class ВetailView: UIViewController {
+class DetailslViewController: UIViewController {
     
     var descriptionImageName: String?
     var titleText: String?

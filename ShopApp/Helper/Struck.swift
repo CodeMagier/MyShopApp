@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Coffee {
+struct Product {
     
     var image: String
     var title: String

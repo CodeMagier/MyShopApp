@@ -1,7 +1,7 @@
 
 import UIKit
 
-class BagVC: UIViewController {
+class BagViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -25,17 +25,17 @@ final class CustomTabBarController: UITabBarController {
     
     private func setupTabItem() {
         
-        let majorVC = MajorViewController()
+        let majorVC = MainViewController()
         majorVC.tabBarItem.image = UIImage(systemName: "house")
         
-        let bagVC = BagVC()
+        let bagVC = BagViewController()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
-        let compassVC = CompassVC()
+        let compassVC = CompassViewController()
         compassVC.tabBarItem.image = UIImage(systemName: "location")
         //compassVC.tabBarItem.image = UIImage(resource: .kompas)
         
-        let profileVC = ProfileVC()
+        let profileVC = ProfileViewController()
         profileVC.tabBarItem.image = UIImage(systemName: "person")
         
         setViewControllers([majorVC, bagVC, compassVC, profileVC], animated: false)

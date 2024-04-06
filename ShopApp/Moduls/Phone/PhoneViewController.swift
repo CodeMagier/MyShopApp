@@ -1,7 +1,7 @@
 
 import UIKit
 
-class PhoneControllerView: UIViewController {
+class PhoneViewController: UIViewController {
     
     private let geeksImage: UIImageView = {
         let image = UIImageView()
@@ -35,6 +35,7 @@ class PhoneControllerView: UIViewController {
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
+        button.addTarget(PhoneViewController.self, action: #selector(goToMajorViewController), for: .touchUpInside)
         return button
     }()
     
@@ -69,11 +70,12 @@ class PhoneControllerView: UIViewController {
             make.top.equalTo(phoneTextField.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(phoneTextField)
             make.height.equalTo(50)
-        };  entranceButton.addTarget(self, action: #selector(goToMajorViewController), for: .touchUpInside)
+        }
     }
     
-    @objc func goToMajorViewController() {
-        let vc = MajorViewController()
+    @objc
+    private func goToMajorViewController() {
+        let vc = MainViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
