@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Coffee {
+struct Product {
     
     var image: String
     var title: String
@@ -13,4 +13,12 @@ struct Coffee {
 struct Cellitem {
     
     var type: String
+}
+
+struct information {
+    
+    var image: String
+    var title: String
+    var price: String
+    var description: String
 }
