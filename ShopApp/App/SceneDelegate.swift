@@ -9,16 +9,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let nav1 = UINavigationController(rootViewController: CustomTabBarController())
+        let nav1 = UINavigationController(rootViewController: StartViewController())
         window.rootViewController = nav1
         self.window = window
         self.window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {}
+    
     func sceneDidBecomeActive(_ scene: UIScene) {}
+    
     func sceneWillResignActive(_ scene: UIScene) {}
+    
     func sceneWillEnterForeground(_ scene: UIScene) {}
+    
     func sceneDidEnterBackground(_ scene: UIScene) {}
     
 }

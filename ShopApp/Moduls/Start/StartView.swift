@@ -2,8 +2,8 @@
 import UIKit
 import SnapKit
 
-class EntranceViewController: UIViewController {
-    
+class StartView: UIView {
+
     private let geeksImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -17,37 +17,40 @@ class EntranceViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
-        button.addTarget(EntranceViewController.self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
+        
         return button
     }()
+    
+    var didLoginTapped: (() -> Void)?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .systemBackground
+        entranceButton.addTarget(self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
         setupConstreints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupConstreints() {
-        view.addSubview(geeksImage)
+        addSubview(geeksImage)
         geeksImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(180)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(180)
             make.centerX.equalToSuperview()
         }
         
-        view.addSubview(entranceButton)
+        addSubview(entranceButton)
         entranceButton.snp.makeConstraints { make in
             make.top.equalTo(geeksImage.snp.bottom).offset(90)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
-    
     }
     
-    @objc 
+    @objc
     private func goToPhoneControllerView() {
-        let vc = PhoneViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        didLoginTapped?()
     }
-
 }
-

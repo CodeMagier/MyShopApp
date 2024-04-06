@@ -3,9 +3,7 @@ import UIKit
 import SnapKit
 
 class CustomTableViewCell: UITableViewCell {
-    
-    static let SetupID = "note_cell"
-    
+ 
     private lazy var coffeeImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -40,6 +38,8 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
+    
+    static let SetupID = "note_cell"
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
