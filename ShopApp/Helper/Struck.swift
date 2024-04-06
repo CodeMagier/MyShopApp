@@ -15,7 +15,7 @@ struct Cellitem {
     var type: String
 }
 
-struct information {
+struct Information {
     
     var image: String
     var title: String
