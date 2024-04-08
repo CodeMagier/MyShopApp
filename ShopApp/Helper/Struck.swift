@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Product {
+struct ProductTapy {
     
     var image: String
     var title: String

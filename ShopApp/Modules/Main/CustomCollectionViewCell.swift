@@ -43,4 +43,10 @@ class CustomCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setup(catedory: Category) {
+        
+        titleLabel.text = catedory.strCategory
+
+    }
+    
 }

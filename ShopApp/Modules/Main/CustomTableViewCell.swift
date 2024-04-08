@@ -4,7 +4,7 @@ import SnapKit
 
 class CustomTableViewCell: UITableViewCell {
  
-    private lazy var coffeeImage: UIImageView = {
+    private lazy var productImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.tintColor = .label
@@ -34,8 +34,9 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var preisLabel: UILabel = {
+    private lazy var price: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(hex: "FF8B5B")
         return label
     }()
     
@@ -50,19 +51,27 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(product: Product) {
-        
-        coffeeImage.image = UIImage(named: product.image)
-        titleLabel.text = product.title
-        drinkLabel.text = product.drink
-        preisLabel.text = product.preis
-        
+    func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let data = data, error == nil, let image = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self?.productImage.image = image
+            }
+        }.resume()
     }
     
+    func setup(product: Product) {
+
+        titleLabel.text = product.strMeal
+        loadImage(from: product.strMealThumb)
+    }
+
     private func setupConstraints() {
         
-        addSubview(coffeeImage)
-        coffeeImage.snp.makeConstraints { make in
+        addSubview(productImage)
+        productImage.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(0)
             make.height.width.equalTo(89)
@@ -72,21 +81,13 @@ class CustomTableViewCell: UITableViewCell {
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(drinkLabel)
-        stackView.addArrangedSubview(preisLabel)
+        stackView.addArrangedSubview(price)
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(coffeeImage.snp.trailing).offset(16)
+            make.leading.equalTo(productImage.snp.trailing).offset(16)
             make.trailing.equalToSuperview()
         }
     }
-    
-    func fill(with model: ProductModel) {
-        
-        coffeeImage.image = UIImage(named: model.productImage)
-        titleLabel.text = model.productName
-        drinkLabel.text = model.productDescription
-        preisLabel.text = model.productPrice
-    }
-    
+
 }
