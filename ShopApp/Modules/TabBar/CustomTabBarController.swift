@@ -5,23 +5,27 @@ final class CustomTabBarController: UITabBarController {
     
     private let customTabBar = CustomTabBar()
     
+    private let plusButton = PlusButton(frame: .zero)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setValue(customTabBar, forKey: "tabBar")
-        setupTabItem()
         setupNavigtionItem()
+        setupTabItem()
+        setupPlusButtonAction()
+     
     }
     
     private func setupNavigtionItem() {
-            navigationItem.title = "Меню"
+        navigationItem.title = "Меню"
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
-                                                     style: .plain,
-                                                     target: self,
-                                                     action: .none)
-            navigationItem.rightBarButtonItem = rightBarButtonItem
-            navigationController?.navigationBar.tintColor = .black
-        }
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: .none)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationController?.navigationBar.tintColor = .black
+    }
     
     private func setupTabItem() {
         
@@ -40,5 +44,12 @@ final class CustomTabBarController: UITabBarController {
         
         setViewControllers([majorVC, bagVC, compassVC, profileVC], animated: false)
     }
-
+    
+    private func setupPlusButtonAction() {
+        plusButton.didGrcodeTapped = { [ weak self ] in
+            guard let self else { return }
+            let vc = BagViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }

@@ -3,12 +3,14 @@ import UIKit
 
 final class PlusButton: UIButton {
     
+    var didGrcodeTapped: (() -> Void)?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         layer.cornerRadius = frame.width / 2
     }
-  
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -31,8 +33,8 @@ final class PlusButton: UIButton {
         addTarget(self, action: #selector(goToProfileVC), for: .touchUpInside)
     }
     
-    @objc func goToProfileVC() {
-
-        
+    @objc 
+    func goToProfileVC() {
+        didGrcodeTapped?()
     }
 }

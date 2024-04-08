@@ -17,8 +17,8 @@ class PhoneViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        phoneView.didLoginTapped = { [ weak self] in
-            guard let self else { return}
+        phoneView.didLoginTapped = { [ weak self ] in
+            guard let self else { return }
             let vc = MainViewController()
             navigationController?.pushViewController(vc, animated: true)
         }

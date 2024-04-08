@@ -2,12 +2,7 @@
 import UIKit
 import SnapKit
 
-class DetailslViewController: UIViewController {
-    
-    var descriptionImageName: String?
-    var titleText: String?
-    var priceText: String?
-    var descriptionText: String?
+class DetailsView: UIView {
     
     private let descriptionImage: UIImageView = {
         let view = UIImageView()
@@ -41,44 +36,54 @@ class DetailslViewController: UIViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+    var descriptionImageName: String?
+    var titleText: String?
+    var priceText: String?
+    var descriptionText: String?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .systemBackground
         configureView()
         setupConstraints()
-        
     }
     
-    private func configureView() {
-        if let imageName = descriptionImageName, let image = UIImage(named: imageName) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+     func configureView() {
+        if let imageName = descriptionImageName,
+           let image = UIImage(named: imageName) {
             descriptionImage.image = image
         }
+         
         titleLabel.text = titleText
         priceLabel.text = priceText
         descriptionLabel.text = descriptionText
     }
     
     private func setupConstraints() {
-        view.addSubview(descriptionImage)
+        addSubview(descriptionImage)
         descriptionImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
             make.horizontalEdges.equalToSuperview().inset(0)
             make.height.equalTo(225)
         }
         
-        view.addSubview(titleLabel)
+        addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionImage.snp.bottom).offset(15)
             make.leading.equalToSuperview().offset(16)
         }
         
-        view.addSubview(priceLabel)
+        addSubview(priceLabel)
         priceLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionImage.snp.bottom).offset(15)
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        view.addSubview(descriptionLabel)
+        addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview().inset(16)
