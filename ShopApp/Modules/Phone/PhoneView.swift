@@ -32,7 +32,7 @@ class PhoneView: UIView {
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Войти", for: .normal)
-        button.tintColor = .white
+        button.tintColor = .label
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
         return button

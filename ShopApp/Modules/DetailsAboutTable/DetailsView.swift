@@ -56,18 +56,31 @@ class DetailsView: UIView {
         return label
     }()
     
+    private let buyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("To order", for: .normal)
+        button.backgroundColor = UIColor(hex: "#FF8B5B")
+        button.tintColor = .label
+        button.layer.cornerRadius = 18
+
+        return button
+    }()
+    
     private let netWorkLayer = NetworkLayer()
     
     var idMeal: String?
-
+    
+    var didOrderTapped: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         setupConstraints()
         loadMealDetails(idMeal: "")
+        buyButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
         
     }
-        
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -104,7 +117,7 @@ class DetailsView: UIView {
         descriptionLabel.text = meal.strInstructions
         loadImage(from: meal.strMealThumb)
     }
- 
+    
     private func setupConstraints() {
         
         addSubview(scrollView)
@@ -114,12 +127,11 @@ class DetailsView: UIView {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-      
-            
-            contentView.snp.makeConstraints { make in
-                make.top.bottom.equalTo(scrollView)
-                make.left.right.equalTo(self)
-                make.width.equalTo(scrollView)
+        
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(scrollView)
+            make.left.right.equalTo(scrollView)
+            make.width.equalTo(scrollView)
             
         }
         
@@ -146,13 +158,26 @@ class DetailsView: UIView {
         categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.trailing.equalTo(contentView).offset(-16)
+            
         }
         
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(areaLabel.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(contentView).inset(16)
-            make.bottom.equalTo(contentView).offset(-10)
         }
+        
+        contentView.addSubview(buyButton)
+        buyButton.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(contentView).inset(16)
+            make.bottom.equalTo(contentView).offset(-10)
+            make.height.equalTo(50)
+        }
+    }
+    
+    @objc
+    func goTo() {
+        didOrderTapped?()
     }
 }

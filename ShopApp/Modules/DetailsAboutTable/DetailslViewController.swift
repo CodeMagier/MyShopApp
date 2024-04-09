@@ -27,5 +27,10 @@ class DetailslViewController: UIViewController {
         detailsView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        detailsView.didOrderTapped = { [ weak self ] in
+            guard let self else { return }
+            let vc = MainViewController()
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 }
