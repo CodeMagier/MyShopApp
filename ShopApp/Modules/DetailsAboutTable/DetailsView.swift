@@ -4,6 +4,17 @@ import SnapKit
 
 class DetailsView: UIView {
     
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private let descriptionImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage()
@@ -95,35 +106,53 @@ class DetailsView: UIView {
     }
  
     private func setupConstraints() {
-        addSubview(descriptionImage)
+        
+        addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+      
+            
+            contentView.snp.makeConstraints { make in
+                make.top.bottom.equalTo(scrollView)
+                make.left.right.equalTo(self)
+                make.width.equalTo(scrollView)
+            
+        }
+        
+        contentView.addSubview(descriptionImage)
         descriptionImage.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(0)
+            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(10)
+            make.horizontalEdges.equalTo(contentView)
             make.height.equalTo(225)
         }
         
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionImage.snp.bottom).offset(15)
-            make.leading.equalToSuperview().offset(16)
+            make.horizontalEdges.equalTo(contentView).inset(16)
         }
         
-        addSubview(areaLabel)
+        contentView.addSubview(areaLabel)
         areaLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalTo(contentView).offset(16)
         }
         
-        addSubview(categoryLabel)
+        contentView.addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.trailing.equalToSuperview().offset(-16)
+            make.trailing.equalTo(contentView).offset(-16)
         }
         
-        addSubview(descriptionLabel)
+        contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(areaLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(16)
+            make.horizontalEdges.equalTo(contentView).inset(16)
+            make.bottom.equalTo(contentView).offset(-10)
         }
     }
 }
