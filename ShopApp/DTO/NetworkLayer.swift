@@ -12,8 +12,8 @@ struct NetworkLayer {
                                Error>) -> Void) {
         let reguest = URLRequest(url: Constants.categoryURL)
         URLSession.shared.dataTask(with: reguest) { data,
-                                                    response,
-                                                    error in
+            response,
+            error in
             if let error {
                 completion(.failure(error))
             }
@@ -35,20 +35,48 @@ struct NetworkLayer {
                                Error>) -> Void) {
         let reguest = URLRequest(url: Constants.baseURL)
         URLSession.shared.dataTask(with: reguest) { data,
-                                                    response,
-                                                    error in
+            response,
+            error in
             if let error {
                 completion(.failure(error))
             }
             
             if let data {
                 do {
-                    let model = try decoder.decode(Products.self, 
+                    let model = try decoder.decode(Products.self,
                                                    from: data)
                     completion(.success(model.meals))
                 } catch {
                     completion(.failure(error))
                 }
+            }
+        }.resume()
+    }
+    
+    func fetchMealDetails(by idMeal: String, completion: @escaping (Result<Meal, Error>) -> Void) {
+        let urlString = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(idMeal)"
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "dataNilError", code: -1001, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let mealDetails = try JSONDecoder().decode(Meals.self, from: data)
+                if let firstMeal = mealDetails.meals.first {
+                    completion(.success(firstMeal))
+                } else {
+                    completion(.failure(NSError(domain: "noDataError", code: -1002, userInfo: nil)))
+                }
+            } catch {
+                completion(.failure(error))
             }
         }.resume()
     }

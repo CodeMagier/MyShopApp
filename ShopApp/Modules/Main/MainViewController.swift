@@ -49,6 +49,8 @@ class MainViewController: UIViewController {
 
     private var products: [Product] = []
     
+    private var meals: [Meal] = []
+    
     private let netWorkLayer = NetworkLayer()
     
     private var selectedIndex: IndexPath? {
@@ -63,8 +65,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupConstreints()
-        fetchProducts()
         fetchCategorys()
+        fetchProducts()
         selectedIndex = IndexPath(item: 0, section: 0)
         
     }
@@ -96,7 +98,7 @@ class MainViewController: UIViewController {
             }
         }
     }
- 
+
     private func setupConstreints() {
         
         view.addSubview(noteSearchBar)
@@ -164,19 +166,16 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController: UITableViewDataSource {
-        func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row < products.count else { return }
+        let product = products[indexPath.row]
         let detailVC = DetailslViewController()
-        detailVC.configureDetails = { [ weak detailVC ] in
-            guard let detailsView = detailVC?.detailsView else { return }
-            detailsView.configureView()            
-        }
-        
+        //detailVC.loadMealDetails(idMeal: product.idMeal)
+        detailVC.idMeal = product.idMeal
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

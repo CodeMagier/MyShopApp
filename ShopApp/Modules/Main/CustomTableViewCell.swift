@@ -41,6 +41,8 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     static let SetupID = "note_cell"
+    
+    var idMeal: String?
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -66,6 +68,8 @@ class CustomTableViewCell: UITableViewCell {
 
         titleLabel.text = product.strMeal
         loadImage(from: product.strMealThumb)
+        self.idMeal = product.idMeal
+        
     }
 
     private func setupConstraints() {
