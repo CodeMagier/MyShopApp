@@ -7,7 +7,7 @@ class MainViewController: UIViewController {
     private let noteSearchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search"
-        bar.backgroundImage = UIImage()
+       // bar.backgroundImage = UIImage()
         return bar
     }()
     
