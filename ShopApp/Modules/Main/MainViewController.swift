@@ -8,6 +8,7 @@ class MainViewController: UIViewController {
         let bar = UISearchBar()
         bar.placeholder = "Search"
        // bar.backgroundImage = UIImage()
+        bar.searchTextField.addTarget(self, action: #selector(noteSearchBarEditing), for: .editingChanged)
         return bar
     }()
     
@@ -45,6 +46,8 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    private var filteredProducts: [Product] = []
+    
     private var categorys: [Category] = []
 
     private var products: [Product] = []
@@ -70,7 +73,7 @@ class MainViewController: UIViewController {
         selectedIndex = IndexPath(item: 0, section: 0)
         
     }
-    
+                                     
     private func fetchCategorys() {
         netWorkLayer.fetchCategorys { result in
             switch result {
@@ -91,12 +94,25 @@ class MainViewController: UIViewController {
             case .success(let products):
                 DispatchQueue.main.async {
                     self.products = products
+                    self.filteredProducts = products
                     self.menuTableView.reloadData()
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
+    }
+    
+    @objc func noteSearchBarEditing() {
+        guard let searchText = noteSearchBar.text, !searchText.isEmpty else {
+            filteredProducts = products
+            menuTableView.reloadData()
+            return
+        }
+        filteredProducts = products.filter { product in
+            return product.strMeal.lowercased().contains(searchText.lowercased())
+        }
+        menuTableView.reloadData()
     }
 
     private func setupConstreints() {
@@ -167,7 +183,7 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController: UITableViewDataSource {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+            return filteredProducts.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -183,7 +199,7 @@ extension MainViewController: UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.SetupID,
                                                  for: indexPath) as? CustomTableViewCell
-        let product = products[indexPath.row]
+        let product = filteredProducts[indexPath.row]
         cell?.setup(product: product)
         return cell!
     }
