@@ -27,5 +27,22 @@ struct Product: Codable {
     
 }
 
+struct Meals: Codable {
+    
+    let meals: [Meal]
+    
+}
+
+struct Meal: Codable {
+    
+    let idMeal: String
+    let strMeal: String
+    let strCategory: String
+    let strArea: String
+    let strInstructions: String
+    let strMealThumb: String
+    
+}
+
 
 
