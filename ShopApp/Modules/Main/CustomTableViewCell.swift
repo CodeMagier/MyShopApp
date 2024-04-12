@@ -28,11 +28,6 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var drinkLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .light)
-        return label
-    }()
     
     private lazy var price: UILabel = {
         let label = UILabel()
@@ -53,23 +48,17 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else { return }
+    func fill(with item: Product) {
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self?.productImage.image = image
+        titleLabel.text = item.strMeal
+        self.idMeal = item.idMeal
+        ImageDownloader.shared.loadImage(from: item.strMealThumb) { result in
+            if case .success(let image) = result {
+                DispatchQueue.main.async {
+                    self.productImage.image = image
+                }
             }
-        }.resume()
-    }
-    
-    func setup(product: Product) {
-
-        titleLabel.text = product.strMeal
-        loadImage(from: product.strMealThumb)
-        self.idMeal = product.idMeal
-        
+        }
     }
 
     private func setupConstraints() {
@@ -84,7 +73,6 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(drinkLabel)
         stackView.addArrangedSubview(price)
         
         stackView.snp.makeConstraints { make in

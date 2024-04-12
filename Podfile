@@ -6,4 +6,5 @@ target 'ShopApp' do
 
   # Pods for ShopApp
 pod 'SnapKit'
+pod 'FirebaseAuth'
 end

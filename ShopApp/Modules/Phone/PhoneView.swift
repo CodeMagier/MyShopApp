@@ -12,7 +12,7 @@ class PhoneView: UIView {
     
     private let enterlabel: UILabel = {
         let label = UILabel()
-        label.text = "Вход"
+        label.text = "Log in"
         label.textColor = .label
         label.font = .systemFont(ofSize: 34, weight: .light)
         return label
@@ -31,7 +31,7 @@ class PhoneView: UIView {
     
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Войти", for: .normal)
+        button.setTitle("Log in", for: .normal)
         button.tintColor = .label
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
@@ -40,10 +40,14 @@ class PhoneView: UIView {
     
     var didLoginTapped: (() -> Void)?
     
+    var phoneNumber: String? {
+        return phoneTextField.text
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
-        entranceButton.addTarget(self, action: #selector(goToMajorViewController), for: .touchUpInside)
+        entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
         setupConsteints()
     }
     
@@ -80,7 +84,7 @@ class PhoneView: UIView {
     }
     
     @objc
-    func goToMajorViewController() {
+    func goToMainViewController() {
         didLoginTapped?()
     }
 }

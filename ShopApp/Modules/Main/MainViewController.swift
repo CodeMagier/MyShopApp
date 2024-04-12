@@ -7,8 +7,6 @@ class MainViewController: UIViewController {
     private let noteSearchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search"
-       // bar.backgroundImage = UIImage()
-        bar.searchTextField.addTarget(self, action: #selector(noteSearchBarEditing), for: .editingChanged)
         return bar
     }()
     
@@ -19,7 +17,7 @@ class MainViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
-        var collection = UICollectionView(frame: .zero, 
+        var collection = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         collection.register(CustomCollectionViewCell.self,
                             forCellWithReuseIdentifier: CustomCollectionViewCell.CellID)
@@ -41,20 +39,24 @@ class MainViewController: UIViewController {
         view.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 18, right: 0)
         view.dataSource = self
         view.delegate = self
-        view.register(CustomTableViewCell.self, 
+        view.register(CustomTableViewCell.self,
                       forCellReuseIdentifier: CustomTableViewCell.SetupID)
         return view
     }()
     
     private var filteredProducts: [Product] = []
     
-    private var categorys: [Category] = []
-
+    private var categories: [Category] = []
+    
     private var products: [Product] = []
     
-    private var meals: [Meal] = []
-    
     private let netWorkLayer = NetworkLayer()
+    
+    private var selectedCategory: Category? {
+        didSet {
+            fetchProducts(by: selectedCategory!)
+        }
+    }
     
     private var selectedIndex: IndexPath? {
         didSet {
@@ -62,24 +64,23 @@ class MainViewController: UIViewController {
         }
     }
     
-    private var selectedCategoryInadex = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        noteSearchBar.searchTextField.addTarget(self, action: #selector(noteSearchBarEditing), for: .editingChanged)
         view.backgroundColor = .systemBackground
         setupConstreints()
         fetchCategorys()
-        fetchProducts()
         selectedIndex = IndexPath(item: 0, section: 0)
         
     }
-                                     
+    
     private func fetchCategorys() {
         netWorkLayer.fetchCategorys { result in
             switch result {
             case .success(let categorys):
                 DispatchQueue.main.async {
-                    self.categorys = categorys
+                    self.categories = categorys
+                    self.selectedCategory = categorys.first!
                     self.horizontalCollectionView.reloadData()
                 }
             case .failure(let failure):
@@ -87,9 +88,9 @@ class MainViewController: UIViewController {
             }
         }
     }
- 
-    private func fetchProducts() {
-        netWorkLayer.fetchProducts { result in
+    
+    private func fetchProducts(by category: Category) {
+        netWorkLayer.fetchProducts(by: category.title) { result in
             switch result {
             case .success(let products):
                 DispatchQueue.main.async {
@@ -103,7 +104,8 @@ class MainViewController: UIViewController {
         }
     }
     
-    @objc func noteSearchBarEditing() {
+    @objc
+    private func noteSearchBarEditing() {
         guard let searchText = noteSearchBar.text, !searchText.isEmpty else {
             filteredProducts = products
             menuTableView.reloadData()
@@ -114,7 +116,7 @@ class MainViewController: UIViewController {
         }
         menuTableView.reloadData()
     }
-
+    
     private func setupConstreints() {
         
         view.addSubview(noteSearchBar)
@@ -149,16 +151,16 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return categorys.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.CellID,
-            for: indexPath) as! CustomCollectionViewCell
+                                                      for: indexPath) as! CustomCollectionViewCell
         cell.backgroundColor = indexPath == selectedIndex ? .purple : .clear
         cell.layer.cornerRadius = 16
-        let category = categorys[indexPath.row]
+        let category = categories[indexPath.row]
         cell.setup(catedory: category)
         return cell
     }
@@ -167,10 +169,12 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-
-        selectedCategoryInadex = indexPath.row
+        titleLabel.text = categories[indexPath.row].title
         menuTableView.reloadData()
         selectedIndex = indexPath
+        let category = categories[indexPath.row]
+        selectedCategory = category
+        
         
     }
     func collectionView(_ collectionView: UICollectionView,
@@ -182,15 +186,14 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController: UITableViewDataSource {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return filteredProducts.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredProducts.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < products.count else { return }
         let product = products[indexPath.row]
         let detailVC = DetailslViewController()
-        //detailVC.loadMealDetails(idMeal: product.idMeal)
         detailVC.idMeal = product.idMeal
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -200,7 +203,7 @@ extension MainViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.SetupID,
                                                  for: indexPath) as? CustomTableViewCell
         let product = filteredProducts[indexPath.row]
-        cell?.setup(product: product)
+        cell?.fill(with: product)
         return cell!
     }
 }
