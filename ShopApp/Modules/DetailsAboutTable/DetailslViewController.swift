@@ -4,23 +4,20 @@ import SnapKit
 
 class DetailslViewController: UIViewController {
         
-    let detailsView = DetailsView(frame: .zero)
+   private let detailsView = DetailsView(frame: .zero)
     
-    var idMeal: String? {
-           didSet {
-               if let idMeal = idMeal {
-                   detailsView.loadMealDetails(idMeal: idMeal)
-               }
-           }
-       }
+    var idMeal: String!
+    
+    private let netWorkLayer = NetworkLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        loadMealDetails(idMeal: idMeal)
         setup()
         
     }
-   
+ 
     private func setup() {
         
         view.addSubview(detailsView)
@@ -29,8 +26,21 @@ class DetailslViewController: UIViewController {
         }
         detailsView.didOrderTapped = { [ weak self ] in
             guard let self else { return }
-            let vc = MainViewController()
             navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
+    func loadMealDetails(idMeal: String) {
+        netWorkLayer.fetchMealDetails(by: idMeal) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let mealDetails):
+                DispatchQueue.main.async {
+                    self.detailsView.fill(with: mealDetails)
+                }
+            case .failure(let error):
+                print("Ошибка: \(error)")
+            }
         }
     }
 }

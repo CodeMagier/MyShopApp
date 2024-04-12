@@ -62,11 +62,9 @@ class DetailsView: UIView {
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.tintColor = .label
         button.layer.cornerRadius = 18
-
+        
         return button
     }()
-    
-    private let netWorkLayer = NetworkLayer()
     
     var idMeal: String?
     
@@ -76,7 +74,6 @@ class DetailsView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         setupConstraints()
-        loadMealDetails(idMeal: "")
         buyButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
         
     }
@@ -85,37 +82,18 @@ class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadMealDetails(idMeal: String) {
-        netWorkLayer.fetchMealDetails(by: idMeal) { [weak self] result in
-            switch result {
-            case .success(let mealDetails):
+    func fill(with item: Meal) {
+        titleLabel.text = item.strMeal
+        areaLabel.text = item.strArea
+        categoryLabel.text = item.strCategory
+        descriptionLabel.text = item.strInstructions
+        ImageDownloader.shared.loadImage(from: item.strMealThumb) { result in
+            if case .success(let image) = result {
                 DispatchQueue.main.async {
-                    
-                    self?.updateUIWith(meal: mealDetails)
+                    self.descriptionImage.image = image
                 }
-            case .failure(let error):
-                print("Ошибка: \(error)")
             }
         }
-    }
-    
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self?.descriptionImage.image = image
-            }
-        }.resume()
-    }
-    
-    func updateUIWith(meal: Meal) {
-        titleLabel.text = meal.strMeal
-        areaLabel.text = meal.strArea
-        categoryLabel.text = meal.strCategory
-        descriptionLabel.text = meal.strInstructions
-        loadImage(from: meal.strMealThumb)
     }
     
     private func setupConstraints() {
@@ -177,7 +155,7 @@ class DetailsView: UIView {
     }
     
     @objc
-    func goTo() {
+    private func goTo() {
         didOrderTapped?()
     }
 }

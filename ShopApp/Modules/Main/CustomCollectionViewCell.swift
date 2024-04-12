@@ -35,17 +35,13 @@ class CustomCollectionViewCell: UICollectionViewCell {
         
         }
     
-    func setTitle(label: Cellitem) {
-        titleLabel.text = label.type
-    }
-        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setup(catedory: Category) {
         
-        titleLabel.text = catedory.strCategory
+        titleLabel.text = catedory.title
 
     }
     
