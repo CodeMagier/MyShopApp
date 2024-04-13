@@ -17,7 +17,7 @@ final class CustomTabBarController: UITabBarController {
      
     }
     
-    private func setupNavigtionItem() {
+     func setupNavigtionItem() {
         navigationItem.title = "Меню"
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
                                                  style: .plain,
@@ -32,7 +32,7 @@ final class CustomTabBarController: UITabBarController {
         let majorVC = MainViewController()
         majorVC.tabBarItem.image = UIImage(systemName: "house")
         
-        let bagVC = BagViewController()
+        var bagVC = BagViewController()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
         let compassVC = CompassViewController()

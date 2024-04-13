@@ -3,7 +3,7 @@ import UIKit
 import SnapKit
 
 class CustomTableViewCell: UITableViewCell {
- 
+    
     private lazy var productImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -28,28 +28,96 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    
-    private lazy var price: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor(hex: "FF8B5B")
-        return label
+    private lazy var addToCartButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
+        button.tintColor = .label
+        return button
     }()
     
     static let SetupID = "note_cell"
     
     var idMeal: String?
-  
+    
+    var didCartTapped: ((CGPoint) -> Void)?
+    
+    weak var parentTableView: UITableView?
+    
+    var counterItem = 0
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addToCartButton.addTarget(self, action: #selector(handleAddToCart), for: .touchUpInside)
         setupConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with product: Product, tableView: UITableView) {
+        fill(with: product)
+        self.parentTableView = tableView
+    }
+    
+    @objc
+    private func handleAddToCart(_ sender: UIButton) {
+        if let tableView = parentTableView {
+            let buttonPosition: CGPoint = sender.convert(sender.bounds.origin, to: tableView)
+            
+            let indexPath = tableView.indexPathForRow(at: buttonPosition)!
+            
+            let cell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
+            
+            let imageViewPosition: CGPoint = cell.productImage.convert(cell.productImage.bounds.origin, to: self.contentView)
+            
+            let imgViewTemp = UIImageView(frame: CGRect(x: imageViewPosition.x, y: imageViewPosition.y, width: cell.productImage.frame.size.width, height: cell.productImage.frame.size.height))
+            
+            imgViewTemp.image = cell.productImage.image
+            animation(tempView: imgViewTemp)
+            
+            didCartTapped?(buttonPosition)
+        }
+    }
+    
+    func animation(tempView : UIView)  {
+        self.contentView.addSubview(tempView)
+        UIView.animate(withDuration: 1.0,
+                       animations: {
+            tempView.animationZoom(scaleX: 1.5, y: 1.5)
+        }, completion: { _ in
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                
+                tempView.animationZoom(scaleX: 0.2, y: 0.2)
+                tempView.animationRoted(angle: CGFloat(Double.pi))
+                
+                //            tempView.frame.origin.x = self.addToCartButton.frame.origin.x
+                //            tempView.frame.origin.y = self.addToCartButton.frame.origin.y
+                tempView.frame.origin.x = UIScreen.main.bounds.width - 50
+                tempView.frame.origin.y = UIScreen.main.bounds.height - 100
+                
+            }, completion: { _ in
+                
+                tempView.removeFromSuperview()
+                
+                UIView.animate(withDuration: 1.0, animations: {
+                    
+                    self.counterItem += 1
+                    self.titleLabel.text = "\(self.counterItem)"
+                    self.addToCartButton.animationZoom(scaleX: 1.4, y: 1.4)
+                }, completion: {_ in
+                    self.addToCartButton.animationZoom(scaleX: 1.0, y: 1.0)
+                })
+                
+            })
+            
+        })
+    }
+    
     func fill(with item: Product) {
-
+        
         titleLabel.text = item.strMeal
         self.idMeal = item.idMeal
         ImageDownloader.shared.loadImage(from: item.strMealThumb) { result in
@@ -60,7 +128,7 @@ class CustomTableViewCell: UITableViewCell {
             }
         }
     }
-
+    
     private func setupConstraints() {
         
         addSubview(productImage)
@@ -73,13 +141,28 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(price)
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(productImage.snp.trailing).offset(16)
             make.trailing.equalToSuperview()
         }
+        
+        contentView.addSubview(addToCartButton)
+        addToCartButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(-5)
+        }
     }
+    
+}
 
+extension UIView{
+    func animationZoom(scaleX: CGFloat, y: CGFloat) {
+        self.transform = CGAffineTransform(scaleX: scaleX, y: y)
+    }
+    
+    func animationRoted(angle : CGFloat) {
+        self.transform = self.transform.rotated(by: angle)
+    }
 }

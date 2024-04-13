@@ -146,6 +146,13 @@ class MainViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    
+    
+//    startView.didLoginTapped = { [weak self] in
+//        guard let self else { return }
+//        let vc = PhoneViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -192,6 +199,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < products.count else { return }
+        
         let product = products[indexPath.row]
         let detailVC = DetailslViewController()
         detailVC.idMeal = product.idMeal
@@ -204,6 +212,7 @@ extension MainViewController: UITableViewDataSource {
                                                  for: indexPath) as? CustomTableViewCell
         let product = filteredProducts[indexPath.row]
         cell?.fill(with: product)
+        cell?.configure(with: product, tableView: tableView)
         return cell!
     }
 }

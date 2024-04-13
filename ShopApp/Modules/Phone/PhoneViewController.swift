@@ -22,34 +22,32 @@ class PhoneViewController: UIViewController {
         }
         
         phoneView.didLoginTapped = { [ weak self ] in
-            guard let self else { return }
-            let vc = SMSCodeViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            singIn()
+            self?.sendSms()
+            
         }
     }
     
     private func sendSms() {
-        authService.sendSmsCode(with: "+996703928927") { result in
-            if case.success = result {
-                print("success")
-                
+        guard let phoneNumber = phoneView.phoneNumber else {
+            print("No phone number")
+            return
+            
+        }
+        
+        authService.sendSmsCode(with: phoneNumber) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.showSMSCodeViewController()
+                case .failure(let error):
+                    print("Failed to send SMS: \(error.localizedDescription)")
+                }
             }
         }
     }
     
-    private func singIn() {
-        guard let text  = phoneView.phoneNumber else { return }
-        authService.singIn(with: text) { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+    private func showSMSCodeViewController() {
+        let vc = SMSCodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
-
