@@ -14,9 +14,25 @@ class SMSCodeViewController: UIViewController {
         return tf
     }()
     
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(hex: "#FF8B5B")
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
+    @objc
+    private func goToMeinViewController() {
+        let vc = CustomTabBarController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        nextButton.addTarget(self, action: #selector(goToMeinViewController), for: .touchUpInside)
         setup()
     }
     
@@ -26,6 +42,13 @@ class SMSCodeViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.height.equalTo(40)
             make.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(smsCodeTextField.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(smsCodeTextField)
+            make.height.equalTo(40)
         }
     }
 }

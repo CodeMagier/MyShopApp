@@ -17,9 +17,15 @@ class StartViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        startView.didLoginTapped = { [weak self] in
+        startView.didSignUpTapped = { [weak self] in
             guard let self else { return }
             let vc = PhoneViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        startView.didLogInButton = { [weak self] in
+            guard let self else { return }
+            let vc = SignInViewController()
             navigationController?.pushViewController(vc, animated: true)
         }
     }

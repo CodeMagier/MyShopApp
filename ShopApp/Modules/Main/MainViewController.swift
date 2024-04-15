@@ -146,13 +146,7 @@ class MainViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
-    
-    
-//    startView.didLoginTapped = { [weak self] in
-//        guard let self else { return }
-//        let vc = PhoneViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+
 }
 
 extension MainViewController: UICollectionViewDataSource {

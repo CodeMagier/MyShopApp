@@ -11,22 +11,33 @@ class StartView: UIView {
         return image
     }()
         
-    private let entranceButton: UIButton = {
+    private let SignUpButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Войти", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
-        
         return button
     }()
     
-    var didLoginTapped: (() -> Void)?
+    private let logInbutton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Log In", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
+    var didSignUpTapped: (() -> Void)?
+    
+    var didLogInButton: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
-        entranceButton.addTarget(self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
+        SignUpButton.addTarget(self, action: #selector(goToPhoneControllerView), for: .touchUpInside)
+        logInbutton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
         setupConstreints()
     }
     
@@ -41,16 +52,31 @@ class StartView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        addSubview(entranceButton)
-        entranceButton.snp.makeConstraints { make in
-            make.top.equalTo(geeksImage.snp.bottom).offset(90)
+        addSubview(logInbutton)
+        logInbutton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-90)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
+           
         }
+        
+        addSubview(SignUpButton)
+        SignUpButton.snp.makeConstraints { make in
+            make.bottom.equalTo(logInbutton.snp.top).offset(-10)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+          
+        }
+     
     }
     
     @objc
     private func goToPhoneControllerView() {
-        didLoginTapped?()
+        didSignUpTapped?()
+    }
+    
+    @objc
+    private func goTo() {
+        didLogInButton?()
     }
 }
