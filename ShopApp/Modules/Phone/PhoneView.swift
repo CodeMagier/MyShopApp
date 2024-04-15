@@ -23,11 +23,15 @@ class PhoneView: UIView {
         tf.placeholder = "+996 777 777 777"
         tf.layer.cornerRadius = 18
         tf.backgroundColor = UIColor(hex: "#EDEDED")
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let image = UIImageView(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        image.image = UIImage(systemName: "phone")
+        view.addSubview(image)
         tf.leftView = view
         tf.leftViewMode = .always
         return tf
     }()
+    
     
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
@@ -38,12 +42,8 @@ class PhoneView: UIView {
         return button
     }()
     
-    var didLoginTapped: (() -> Void)?
-    
-    var phoneNumber: String? {
-        return phoneTextField.text
-    }
-    
+    var delegate: PhoneDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
@@ -85,6 +85,8 @@ class PhoneView: UIView {
     
     @objc
     func goToMainViewController() {
-        didLoginTapped?()
+    
+        delegate?.getPhone(phone: phoneTextField.text ?? "" )
     }
+
 }

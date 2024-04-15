@@ -2,7 +2,9 @@
 import Foundation
 import FirebaseAuth
 
-struct AuthService {
+final class AuthService {
+    
+    static let shared = AuthService()
     
     func sendSmsCode(with phoneNumber: String, completion: @escaping (Result<Void, Error>) -> Void)
     
@@ -31,6 +33,12 @@ struct AuthService {
                 completion(.failure(error))
             }
             if let autchResult {
+                let currentDate = Date()
+               guard let oneMinLater = Calendar.current.date(byAdding: .second,
+                                                        value: 30,
+                                                        to: currentDate
+               ) else { return }
+                UserDefaults.standard.set(oneMinLater, forKey: "session")
                 completion(.success(autchResult))
             }
         }

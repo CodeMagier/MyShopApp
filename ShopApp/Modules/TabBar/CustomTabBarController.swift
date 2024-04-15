@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class CustomTabBarController: UITabBarController {
+class CustomTabBarController: UITabBarController {
     
     private let customTabBar = CustomTabBar()
     
@@ -18,31 +18,35 @@ final class CustomTabBarController: UITabBarController {
     }
     
      func setupNavigtionItem() {
-        navigationItem.title = "Меню"
+       navigationItem.title = "Меню"
+     
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"),
                                                  style: .plain,
                                                  target: self,
                                                  action: .none)
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.hidesBackButton = true
         navigationController?.navigationBar.tintColor = .black
     }
     
     private func setupTabItem() {
+        setupNavigtionItem()
         
-        let majorVC = MainViewController()
-        majorVC.tabBarItem.image = UIImage(systemName: "house")
+        let mainVC = MainViewController()
+        mainVC.tabBarItem.image = UIImage(systemName: "house")
         
-        var bagVC = BagViewController()
+        
+        let bagVC = BagViewController()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
+    
         let compassVC = CompassViewController()
         compassVC.tabBarItem.image = UIImage(systemName: "location")
-        //compassVC.tabBarItem.image = UIImage(resource: .kompas)
         
         let profileVC = ProfileViewController()
         profileVC.tabBarItem.image = UIImage(systemName: "person")
         
-        setViewControllers([majorVC, bagVC, compassVC, profileVC], animated: false)
+        setViewControllers([mainVC, bagVC, compassVC, profileVC], animated: false)
     }
     
     private func setupPlusButtonAction() {

@@ -2,6 +2,9 @@
 import UIKit
 import FirebaseAuth
 
+protocol PhoneDelegate {
+    func getPhone(phone: String)
+}
 class PhoneViewController: UIViewController {
     
     private let phoneView = PhoneView(frame: .zero)
@@ -12,7 +15,7 @@ class PhoneViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
-        sendSms()
+        phoneView.delegate = self
     }
     
     private func setup() {
@@ -21,20 +24,18 @@ class PhoneViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        phoneView.didLoginTapped = { [ weak self ] in
-            self?.sendSms()
-            
-        }
     }
     
-    private func sendSms() {
-        guard let phoneNumber = phoneView.phoneNumber else {
-            print("No phone number")
-            return
-            
-        }
-        
-        authService.sendSmsCode(with: phoneNumber) { result in
+    private func showSMSCodeViewController() {
+        let vc = SMSCodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension PhoneViewController: PhoneDelegate {
+    
+    func getPhone(phone: String) {
+        authService.sendSmsCode(with: phone) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -44,10 +45,5 @@ class PhoneViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    private func showSMSCodeViewController() {
-        let vc = SMSCodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

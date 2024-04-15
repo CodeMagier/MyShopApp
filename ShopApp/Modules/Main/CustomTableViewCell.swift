@@ -85,7 +85,7 @@ class CustomTableViewCell: UITableViewCell {
         self.contentView.addSubview(tempView)
         UIView.animate(withDuration: 1.0,
                        animations: {
-            tempView.animationZoom(scaleX: 1.5, y: 1.5)
+            tempView.animationZoom(scaleX: 1.1, y: 1.1)
         }, completion: { _ in
             
             UIView.animate(withDuration: 0.5, animations: {
@@ -93,8 +93,8 @@ class CustomTableViewCell: UITableViewCell {
                 tempView.animationZoom(scaleX: 0.2, y: 0.2)
                 tempView.animationRoted(angle: CGFloat(Double.pi))
                 
-                //            tempView.frame.origin.x = self.addToCartButton.frame.origin.x
-                //            tempView.frame.origin.y = self.addToCartButton.frame.origin.y
+                // tempView.frame.origin.x = self.addToCartButton.frame.origin.x
+                // tempView.frame.origin.y = self.addToCartButton.frame.origin.y
                 tempView.frame.origin.x = UIScreen.main.bounds.width - 50
                 tempView.frame.origin.y = UIScreen.main.bounds.height - 100
                 
