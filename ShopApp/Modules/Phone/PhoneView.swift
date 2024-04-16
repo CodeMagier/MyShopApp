@@ -81,7 +81,7 @@ class PhoneView: UIView {
         return view
     }()
     
-    private let googleButton: UIButton = {
+    private let emailButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "continue with email"
         //config.image = UIImage(resource: .google)
@@ -114,12 +114,15 @@ class PhoneView: UIView {
     var delegate: PhoneDelegate?
     
     var didLogInTapped: (() -> Void)?
+    
+    var didEmailTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
         entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
         logInButton.addTarget(self, action: #selector(goToLogIn), for: .touchUpInside)
+        emailButton.addTarget(self, action: #selector(goToEmail), for: .touchUpInside)
         setupConsteints()
     }
     
@@ -188,8 +191,8 @@ class PhoneView: UIView {
             make.height.equalTo(0.5)
         }
         
-        addSubview(googleButton)
-        googleButton.snp.makeConstraints { make in
+        addSubview(emailButton)
+        emailButton.snp.makeConstraints { make in
             make.top.equalTo(orLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(entranceButton)
             make.height.equalTo(entranceButton)
@@ -197,7 +200,7 @@ class PhoneView: UIView {
         
         addSubview(appleButton)
         appleButton.snp.makeConstraints { make in
-            make.top.equalTo(googleButton.snp.bottom).offset(10)
+            make.top.equalTo(emailButton.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(entranceButton)
             make.height.equalTo(entranceButton)
         }
@@ -212,6 +215,11 @@ class PhoneView: UIView {
     @objc
     private func goToLogIn() {
         didLogInTapped?()
+    }
+    
+    @objc
+    private func goToEmail() {
+        didEmailTapped?()
     }
 
 }

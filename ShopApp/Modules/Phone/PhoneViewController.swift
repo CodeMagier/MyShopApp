@@ -30,6 +30,12 @@ class PhoneViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
         
+        phoneView.didEmailTapped = { [ weak self ] in
+            guard let self else { return }
+            let vc = EmailViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     private func showSMSCodeViewController() {
