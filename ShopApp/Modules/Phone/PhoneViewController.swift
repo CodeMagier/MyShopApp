@@ -1,6 +1,5 @@
 
 import UIKit
-import FirebaseAuth
 
 class PhoneViewController: UIViewController {
     
