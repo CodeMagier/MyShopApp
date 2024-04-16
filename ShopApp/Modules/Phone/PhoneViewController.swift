@@ -1,10 +1,6 @@
 
 import UIKit
-import FirebaseAuth
 
-protocol PhoneDelegate {
-    func getPhone(phone: String)
-}
 class PhoneViewController: UIViewController {
     
     private let phoneView = PhoneView(frame: .zero)

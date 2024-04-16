@@ -42,6 +42,15 @@ final class AuthService {
                 completion(.success(autchResult))
             }
         }
+        func saveSession() {
+            let date = Date()
+            guard let oneMinLater = Calendar.current.date(
+                byAdding: .second,
+                value: 30,
+                to: date
+            ) else { return }
+            UserDefaults.standard.set(oneMinLater, forKey: "session")
+        }
     }
     
     func signIn(
