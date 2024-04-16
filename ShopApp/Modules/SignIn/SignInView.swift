@@ -1,114 +1,209 @@
 
 import UIKit
-import SnapKit
 
 class SignInView: UIView {
     
-    private let SignLabel: UILabel = {
+    private let geeksImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.image = UIImage(resource: .geeks)
+        return image
+    }()
+    
+    private let enterlabel: UILabel = {
         let label = UILabel()
-        label.text = "Sign in with"
-        label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .black
+        label.text = "Welcome back"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 34, weight: .light)
         return label
     }()
     
-    private let PhoneButton: UIButton = {
+    private let emailTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "email address"
+        tf.layer.cornerRadius = 18
+        tf.backgroundColor = UIColor(hex: "#EDEDED")
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let image = UIImageView(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        image.image = UIImage(systemName: "envelope.badge")
+        view.addSubview(image)
+        tf.leftView = view
+        tf.leftViewMode = .always
+        return tf
+    }()
+    
+    private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .phone), for: .normal)
-      //  button.setImage(UIImage(systemName: "phone.circle"), for: .normal)
+        button.setTitle("Continue", for: .normal)
         button.tintColor = .label
-        button.sizeToFit()
+        button.backgroundColor = .systemMint
+        button.layer.cornerRadius = 18
         return button
     }()
     
-    private let AppleButton: UIButton = {
+    private let accountStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 5
+        return stack
+    }()
+    
+    private let accountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "no account ?"
+        label.textColor = .label
+        return label
+    }()
+    
+    private let logInButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .галочка), for: .normal)
-      //  button.setImage(UIImage(systemName: "phone.circle"), for: .normal)
-        button.tintColor = .label
+        button.setTitle("Sign up", for: .normal)
+        button.tintColor = .systemMint
         return button
     }()
     
-    private let GoogleButton: UIButton = {
-        let button = UIButton(type: .system)
-      //  button.setImage(UIImage(resource: .google), for: .normal)
-        button.setImage(UIImage(systemName: "phone.circle"), for: .normal)
-        button.tintColor = .label
-        return button
+    private let orLabel: UILabel = {
+        let label = UILabel()
+        label.text = "or"
+        label.textColor = .label
+        return label
     }()
     
-    private let EmailButton: UIButton = {
-        let button = UIButton(type: .system)
-       // button.setImage(UIImage(resource: .email), for: .normal)
-        button.setImage(UIImage(systemName: "phone.circle"), for: .normal)
-        button.tintColor = .label
-        return button
-    }()
-    private lazy var trashButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(resource: .apple)
-        let view = UIButton(configuration: configuration)
-        
-        view.tintColor = .black
+    private let lineUIView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .label
         return view
     }()
     
-    private let stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 5
-        view.alignment = .center
+    private let secondlineUIView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .label
         return view
     }()
     
-    var didButtonTapped: (() -> Void)?
+    private let phoneButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.title = "continue with phone number"
+        config.image = UIImage(systemName: "phone")
+        config.imagePlacement = .leading
+        config.imagePadding = 15
+        let button = UIButton(configuration: config, primaryAction: nil)
+        //button.tintColor = .label
+        button.backgroundColor = .white
+        button.layer.borderWidth = 0.5
+        button.frame.size = CGSizeMake(40, 40)
+        button.layer.cornerRadius = 18
+        return button
+    }()
     
+    private let appleButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.title = "continue with Apple"
+        config.image = UIImage(systemName: "applelogo")
+        config.imagePlacement = .leading
+        config.imagePadding = 15
+        let button = UIButton(configuration: config, primaryAction: nil)
+        //button.tintColor = .label
+        button.backgroundColor = .white
+        button.layer.borderWidth = 0.5
+        button.frame.size = CGSizeMake(40, 40)
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
+    var delegate: PhoneDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
-        setupView()
-        PhoneButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
-        AppleButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
-        GoogleButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
-        EmailButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
+        self.backgroundColor = .systemBackground
+        entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
+        setupConsteints()
     }
     
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
-        addSubview(SignLabel)
-        SignLabel.snp.makeConstraints { make in
-         //   make.top.equalTo(self.safeAreaInsets).offset(90)
-            make.centerY.equalToSuperview()
+    private func setupConsteints() {
+        addSubview(geeksImage)
+        geeksImage.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(60)
             make.centerX.equalToSuperview()
         }
         
-        addSubview(trashButton)
-        trashButton.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(30)
-            make.centerY.equalToSuperview()
+        addSubview(enterlabel)
+        enterlabel.snp.makeConstraints { make in
+            make.top.equalTo(geeksImage.snp.bottom).offset(30)
+            make.leading.equalToSuperview().offset(16)
         }
         
-        addSubview(stackView)
-        
-       // stackView.addArrangedSubview(PhoneButton)
-       // stackView.addArrangedSubview(AppleButton)
-        stackView.addArrangedSubview(GoogleButton)
-        stackView.addArrangedSubview(EmailButton)
-        
-        stackView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
+        addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(enterlabel.snp.bottom).offset(30)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
         
-    }
+        addSubview(entranceButton)
+        entranceButton.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(emailTextField)
+            make.height.equalTo(50)
+        }
         
-    @objc
-    private func goTo() {
-        didButtonTapped?()
+        addSubview(accountStack)
+        
+        accountStack.addArrangedSubview(accountLabel)
+        accountStack.addArrangedSubview(logInButton)
+        
+        accountStack.snp.makeConstraints { make in
+            make.top.equalTo(entranceButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
+        addSubview(orLabel)
+        orLabel.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        addSubview(lineUIView)
+        lineUIView.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(31.5)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(orLabel.snp.leading).offset(-10)
+            make.height.equalTo(0.5)
+
+        }
+        
+        addSubview(secondlineUIView)
+        secondlineUIView.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(31.5)
+            make.leading.equalTo(orLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(0.5)
+        }
+        
+        addSubview(phoneButton)
+        phoneButton.snp.makeConstraints { make in
+            make.top.equalTo(orLabel.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(entranceButton)
+            make.height.equalTo(entranceButton)
+        }
+        
+        addSubview(appleButton)
+        appleButton.snp.makeConstraints { make in
+            make.top.equalTo(phoneButton.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(entranceButton)
+            make.height.equalTo(entranceButton)
+        }
     }
+    
+    @objc
+    private func goToMainViewController() {
+    
+        delegate?.getPhone(phone: emailTextField.text ?? "" )
+    }
+
 }

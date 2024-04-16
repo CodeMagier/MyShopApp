@@ -32,7 +32,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -45,7 +44,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -58,7 +56,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -79,7 +76,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -93,7 +89,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -115,7 +110,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -128,7 +122,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -141,7 +134,6 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
     
@@ -155,12 +147,10 @@ class ProfileView: UIView {
         let view = UIButton(configuration: configuration)
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 16
-       // view.addTarget(self, action: #selector(firstButtonTapped(sender: )), for: .touchUpInside)
         return view
     }()
    
-    
-    private let exitButton: UIButton = {
+    private lazy var exitButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("log out of your account", for: .normal)
         button.layer.cornerRadius = 16
@@ -177,14 +167,22 @@ class ProfileView: UIView {
         return label
     }()
     
+    var didTapped: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        exitButton.addTarget(self, action: #selector(goTo), for: .touchUpInside)
         backgroundColor = .systemBackground
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    private func goTo() {
+        didTapped?()
     }
     
     private func setupConstraints() {
