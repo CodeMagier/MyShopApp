@@ -5,6 +5,11 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    private func setup() {
+        
         let currentTime = Date()
         if let sessionDate = UserDefaults.standard.object(forKey: "session") as? Date, sessionDate >= currentTime {
             showTabBar()
@@ -12,7 +17,7 @@ class SplashViewController: UIViewController {
             showPhoneNumber()
         }
     }
-    
+ 
     private func showPhoneNumber() {
         let startViewController = StartViewController()
         let navVc = UINavigationController(rootViewController: startViewController)
@@ -27,3 +32,4 @@ class SplashViewController: UIViewController {
         navigationController?.present(navVc, animated: false)
     }
 }
+

@@ -26,7 +26,8 @@ class DetailslViewController: UIViewController {
         }
         detailsView.didOrderTapped = { [ weak self ] in
             guard let self else { return }
-            navigationController?.popToRootViewController(animated: true)
+            let vc = CustomTabBarController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

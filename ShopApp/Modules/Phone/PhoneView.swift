@@ -1,6 +1,10 @@
 
 import UIKit
 
+protocol PhoneDelegate {
+    func getPhone(phone: String)
+}
+
 class PhoneView: UIView {
     
     private let geeksImage: UIImageView = {
@@ -209,7 +213,8 @@ class PhoneView: UIView {
     @objc
     private func goToMainViewController() {
     
-        delegate?.getPhone(phone: phoneTextField.text ?? "" )
+       delegate?.getPhone(phone: phoneTextField.text ?? "" )
+        
     }
     
     @objc

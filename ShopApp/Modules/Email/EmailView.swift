@@ -2,6 +2,12 @@
 import UIKit
 import SnapKit
 
+protocol EmailDelegate {
+    
+    func getEmail(email: String, password: String)
+
+}
+
 class EmailView: UIView {
     
     private let emailTextField: UITextField = {
