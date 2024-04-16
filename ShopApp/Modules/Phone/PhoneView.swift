@@ -12,7 +12,7 @@ class PhoneView: UIView {
     
     private let enterlabel: UILabel = {
         let label = UILabel()
-        label.text = "Log in"
+        label.text = "create an account"
         label.textColor = .label
         label.font = .systemFont(ofSize: 34, weight: .light)
         return label
@@ -32,22 +32,94 @@ class PhoneView: UIView {
         return tf
     }()
     
-    
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Log in", for: .normal)
+        button.setTitle("Sign up", for: .normal)
         button.tintColor = .label
         button.backgroundColor = UIColor(hex: "#FF8B5B")
         button.layer.cornerRadius = 18
         return button
     }()
     
+    private let accountStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 5
+        return stack
+    }()
+    
+    private let accountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "already have an account ?"
+        label.textColor = .label
+        return label
+    }()
+    
+    private let logInButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Log in", for: .normal)
+        button.tintColor = UIColor(hex: "#FF8B5B")
+        return button
+    }()
+    
+    private let orLabel: UILabel = {
+        let label = UILabel()
+        label.text = "or"
+        label.textColor = .label
+        return label
+    }()
+    
+    private let lineUIView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .label
+        return view
+    }()
+    
+    private let secondlineUIView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .label
+        return view
+    }()
+    
+    private let googleButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.title = "continue with email"
+        //config.image = UIImage(resource: .google)
+        config.image = UIImage(systemName: "envelope.badge")
+        config.imagePlacement = .leading
+        config.imagePadding = 15
+        let button = UIButton(configuration: config, primaryAction: nil)
+        //button.tintColor = .label
+        button.backgroundColor = .white
+        button.layer.borderWidth = 0.5
+        button.frame.size = CGSizeMake(40, 40)
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
+    private let appleButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.title = "continue with Apple"
+        config.image = UIImage(systemName: "applelogo")
+        config.imagePlacement = .leading
+        config.imagePadding = 15
+        let button = UIButton(configuration: config, primaryAction: nil)
+        button.backgroundColor = .white
+        button.layer.borderWidth = 0.5
+        button.frame.size = CGSizeMake(40, 40)
+        button.layer.cornerRadius = 18
+        return button
+    }()
+    
     var delegate: PhoneDelegate?
+    
+    var didLogInTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
         entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
+        logInButton.addTarget(self, action: #selector(goToLogIn), for: .touchUpInside)
         setupConsteints()
     }
     
@@ -58,13 +130,13 @@ class PhoneView: UIView {
     private func setupConsteints() {
         addSubview(geeksImage)
         geeksImage.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(100)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(60)
             make.centerX.equalToSuperview()
         }
         
         addSubview(enterlabel)
         enterlabel.snp.makeConstraints { make in
-            make.top.equalTo(geeksImage.snp.bottom).offset(60)
+            make.top.equalTo(geeksImage.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(16)
         }
         
@@ -77,16 +149,69 @@ class PhoneView: UIView {
         
         addSubview(entranceButton)
         entranceButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(20)
+            make.top.equalTo(phoneTextField.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(phoneTextField)
             make.height.equalTo(50)
+        }
+        
+        addSubview(accountStack)
+        
+        accountStack.addArrangedSubview(accountLabel)
+        accountStack.addArrangedSubview(logInButton)
+        
+        accountStack.snp.makeConstraints { make in
+            make.top.equalTo(entranceButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
+        addSubview(orLabel)
+        orLabel.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        addSubview(lineUIView)
+        lineUIView.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(31.5)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(orLabel.snp.leading).offset(-10)
+            make.height.equalTo(0.5)
+
+        }
+        
+        addSubview(secondlineUIView)
+        secondlineUIView.snp.makeConstraints { make in
+            make.top.equalTo(accountStack.snp.bottom).offset(31.5)
+            make.leading.equalTo(orLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(0.5)
+        }
+        
+        addSubview(googleButton)
+        googleButton.snp.makeConstraints { make in
+            make.top.equalTo(orLabel.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(entranceButton)
+            make.height.equalTo(entranceButton)
+        }
+        
+        addSubview(appleButton)
+        appleButton.snp.makeConstraints { make in
+            make.top.equalTo(googleButton.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(entranceButton)
+            make.height.equalTo(entranceButton)
         }
     }
     
     @objc
-    func goToMainViewController() {
+    private func goToMainViewController() {
     
         delegate?.getPhone(phone: phoneTextField.text ?? "" )
+    }
+    
+    @objc
+    private func goToLogIn() {
+        didLogInTapped?()
     }
 
 }

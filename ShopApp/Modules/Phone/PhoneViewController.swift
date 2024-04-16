@@ -24,12 +24,19 @@ class PhoneViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
+        phoneView.didLogInTapped = { [ weak self ] in
+            guard let self else { return }
+            let vc = SignInViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     private func showSMSCodeViewController() {
         let vc = SMSCodeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 extension PhoneViewController: PhoneDelegate {

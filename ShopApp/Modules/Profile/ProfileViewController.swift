@@ -16,7 +16,10 @@ class ProfileViewController: UIViewController {
         profileView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        profileView.didTapped = { [ weak self ] in
+            guard let self else { return }
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
-    
-  
 }
