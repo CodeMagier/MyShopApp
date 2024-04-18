@@ -1,5 +1,6 @@
 
 import UIKit
+import SnapKit
 
 class SignInView: UIView {
     
@@ -17,20 +18,10 @@ class SignInView: UIView {
         label.font = .systemFont(ofSize: 34, weight: .light)
         return label
     }()
+
+    private let emailTextField = UITextField ()
     
-    private let emailTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "email address"
-        tf.layer.cornerRadius = 18
-        tf.backgroundColor = UIColor(hex: "#EDEDED")
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        let image = UIImageView(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
-        image.image = UIImage(systemName: "envelope.badge")
-        view.addSubview(image)
-        tf.leftView = view
-        tf.leftViewMode = .always
-        return tf
-    }()
+    private let emailLabel = UILabel ()
     
     private let entranceButton: UIButton = {
         let button = UIButton(type: .system)
@@ -118,6 +109,9 @@ class SignInView: UIView {
         self.backgroundColor = .systemBackground
         entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
         setupConsteints()
+        configureEmailTextField()
+        configureEmailLabel()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -125,6 +119,7 @@ class SignInView: UIView {
     }
     
     private func setupConsteints() {
+        addSubview(emailLabel)
         addSubview(geeksImage)
         geeksImage.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(60)
@@ -143,11 +138,17 @@ class SignInView: UIView {
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
+        addSubview(emailLabel)
+        emailLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(emailTextField.snp.centerY)
+            make.leading.equalTo(emailTextField.snp.leading).offset(37)
+            
+        }
         
         addSubview(entranceButton)
         entranceButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(emailTextField)
+            make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
         
@@ -206,4 +207,61 @@ class SignInView: UIView {
         delegate?.getPhone(phone: emailTextField.text ?? "" )
     }
 
+}
+
+private extension SignInView {
+    
+    func configureEmailTextField() {
+        emailTextField.layer.cornerRadius = 18
+        emailTextField.layer.borderWidth = 0.5
+        emailTextField.layer.borderColor = UIColor.systemGray.cgColor
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let image = UIImageView(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        image.image = UIImage(systemName: "envelope.badge")
+        view.addSubview(image)
+        emailTextField.leftView = view
+        emailTextField.leftViewMode = .always
+        emailTextField.returnKeyType = .done
+        emailTextField.delegate = self
+        addSubview(emailTextField)
+        
+    }
+    
+    func configureEmailLabel() {
+    
+        emailLabel.text = " email address "
+        emailLabel.textColor = .systemGray2
+        emailLabel.backgroundColor = .white
+        emailLabel.font =  UIFont(name: "Arial", size: 20)
+        addSubview(emailLabel)
+        
+    }
+}
+
+extension SignInView: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        emailLabel.layer.anchorPoint = CGPoint(x: 0.8, y: 0.6)
+        UIView.animate(withDuration: 0.1) {
+            self.emailLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.emailLabel.frame.origin = CGPoint(x: self.emailTextField.frame.origin.x + 45,
+                                                   y: self.emailTextField.frame.minY - self.emailLabel.frame.height / 2)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.1) { [self] in
+            self.emailLabel.transform = .identity
+            self.emailLabel.snp.makeConstraints { make in
+                make.centerY.equalTo(emailTextField.snp.centerY)
+                make.leading.equalTo(emailTextField.snp.leading).offset(37)
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
