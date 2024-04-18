@@ -24,9 +24,10 @@ class PhoneView: UIView {
     
     private let phoneTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "+996 777 777 777"
         tf.layer.cornerRadius = 18
-        tf.backgroundColor = UIColor(hex: "#EDEDED")
+        tf.layer.borderWidth = 0.5
+        tf.layer.borderColor = UIColor.systemGray2.cgColor
+        tf.returnKeyType = .done
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         let image = UIImageView(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
         image.image = UIImage(systemName: "phone")
@@ -34,6 +35,15 @@ class PhoneView: UIView {
         tf.leftView = view
         tf.leftViewMode = .always
         return tf
+    }()
+    
+    private let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = " your phone number "
+        label.textColor = .systemGray2
+        label.backgroundColor = .white
+        label.font = UIFont(name: "Arial", size: 20)
+        return label
     }()
     
     private let entranceButton: UIButton = {
@@ -103,7 +113,7 @@ class PhoneView: UIView {
     
     private let appleButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.title = "continue with Apple"
+        config.title = " continue with Apple "
         config.image = UIImage(systemName: "applelogo")
         config.imagePlacement = .leading
         config.imagePadding = 15
@@ -127,6 +137,7 @@ class PhoneView: UIView {
         entranceButton.addTarget(self, action: #selector(goToMainViewController), for: .touchUpInside)
         logInButton.addTarget(self, action: #selector(goToLogIn), for: .touchUpInside)
         emailButton.addTarget(self, action: #selector(goToEmail), for: .touchUpInside)
+        phoneTextField.delegate = self
         setupConsteints()
     }
     
@@ -154,6 +165,12 @@ class PhoneView: UIView {
             make.height.equalTo(50)
         }
         
+        addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(phoneTextField.snp.centerY)
+            make.leading.equalTo(phoneTextField.snp.leading).offset(40)
+        }
+
         addSubview(entranceButton)
         entranceButton.snp.makeConstraints { make in
             make.top.equalTo(phoneTextField.snp.bottom).offset(10)
@@ -227,4 +244,16 @@ class PhoneView: UIView {
         didEmailTapped?()
     }
 
+}
+
+extension PhoneView: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        phoneLabel.layer.anchorPoint = CGPoint(x: 0.8, y: 0.6)
+        UIView.animate(withDuration: 0.1) {
+            self.phoneLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.phoneLabel.frame.origin = CGPoint(x: self.phoneTextField.frame.origin.x + 50,
+                                                   y: self.phoneTextField.frame.minY - self.phoneLabel.frame.height / 2)
+        }
+    }
 }

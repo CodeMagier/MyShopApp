@@ -37,6 +37,7 @@ class MainViewController: UIViewController {
     private lazy var menuTableView: UITableView = {
         let view = UITableView()
         view.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 18, right: 0)
+    
         view.dataSource = self
         view.delegate = self
         view.register(CustomTableViewCell.self,
@@ -72,6 +73,37 @@ class MainViewController: UIViewController {
         fetchCategorys()
         selectedIndex = IndexPath(item: 0, section: 0)
         
+    }
+
+    
+    private func setupConstreints() {
+        
+        view.addSubview(noteSearchBar)
+        noteSearchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview().inset(0)
+            make.height.equalTo(40)
+        }
+        
+        view.addSubview(horizontalCollectionView)
+        horizontalCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(noteSearchBar.snp.bottom).offset(15)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(32)
+        }
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(horizontalCollectionView.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        view.addSubview(menuTableView)
+        menuTableView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(0)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
+        }
     }
     
     private func fetchCategorys() {
@@ -115,36 +147,6 @@ class MainViewController: UIViewController {
             return product.strMeal.lowercased().contains(searchText.lowercased())
         }
         menuTableView.reloadData()
-    }
-    
-    private func setupConstreints() {
-        
-        view.addSubview(noteSearchBar)
-        noteSearchBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview().inset(0)
-            make.height.equalTo(40)
-        }
-        
-        view.addSubview(horizontalCollectionView)
-        horizontalCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(noteSearchBar.snp.bottom).offset(15)
-            make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(32)
-        }
-        
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(horizontalCollectionView.snp.bottom).offset(15)
-            make.leading.equalToSuperview().offset(16)
-        }
-        
-        view.addSubview(menuTableView)
-        menuTableView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(0)
-            make.horizontalEdges.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview()
-        }
     }
 
 }
