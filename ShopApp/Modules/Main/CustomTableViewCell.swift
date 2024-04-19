@@ -35,7 +35,7 @@ class CustomTableViewCell: UITableViewCell {
         return button
     }()
     
-    static let SetupID = "note_cell"
+    static let reuseId = String(describing: CustomTableViewCell.self)
     
     var idMeal: String?
     
@@ -88,36 +88,33 @@ class CustomTableViewCell: UITableViewCell {
             tempView.animationZoom(scaleX: 1.1, y: 1.1)
         }, completion: { _ in
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 1.2, animations: {
                 
                 tempView.animationZoom(scaleX: 0.2, y: 0.2)
                 tempView.animationRoted(angle: CGFloat(Double.pi))
                 
-                // tempView.frame.origin.x = self.addToCartButton.frame.origin.x
-                // tempView.frame.origin.y = self.addToCartButton.frame.origin.y
-                tempView.frame.origin.x = UIScreen.main.bounds.width - 50
-                tempView.frame.origin.y = UIScreen.main.bounds.height - 100
+                tempView.frame.origin.x = UIScreen.main.bounds.width / 2 - 22
+                tempView.frame.origin.y = UIScreen.main.bounds.height - 120
                 
             }, completion: { _ in
-                
                 tempView.removeFromSuperview()
-                
-                UIView.animate(withDuration: 1.0, animations: {
-                    
-                    self.counterItem += 1
-                    self.titleLabel.text = "\(self.counterItem)"
-                    self.addToCartButton.animationZoom(scaleX: 1.4, y: 1.4)
-                }, completion: {_ in
-                    self.addToCartButton.animationZoom(scaleX: 1.0, y: 1.0)
-                })
-                
+                self.animatTitleLabel()
             })
-            
         })
     }
     
-    func fill(with item: Product) {
+    private func animatTitleLabel() {
+        UIView.animate(withDuration: 1.0) {
+            self.counterItem += 1
+            self.titleLabel.text = "\(self.counterItem)"
+            self.addToCartButton.animationZoom(scaleX: 1.4, y: 1.4)
+        } completion: {_ in
+            self.addToCartButton.animationZoom(scaleX: 1.0, y: 1.0)
+        }
         
+    }
+    
+    func fill(with item: Product) {
         titleLabel.text = item.strMeal
         self.idMeal = item.idMeal
         ImageDownloader.shared.loadImage(from: item.strMealThumb) { result in
@@ -154,7 +151,6 @@ class CustomTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-5)
         }
     }
-    
 }
 
 extension UIView{

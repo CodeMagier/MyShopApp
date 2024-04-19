@@ -87,6 +87,4 @@ struct NetworkLayer {
             }
         }.resume()
     }
-    
-    
 }

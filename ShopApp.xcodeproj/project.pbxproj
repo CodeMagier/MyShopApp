@@ -10,6 +10,12 @@
 		50EEDEFDCFB1E190053541C2 /* Pods_ShopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F347D84B91EB79F4A594DE0B /* Pods_ShopApp.framework */; };
 		635795992BCE79C50087DC5B /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795982BCE79C50087DC5B /* EmailViewController.swift */; };
 		6357959B2BCE79E60087DC5B /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357959A2BCE79E60087DC5B /* EmailView.swift */; };
+		6357959F2BD127E30087DC5B /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357959E2BD127E30087DC5B /* ListSection.swift */; };
+		635795A32BD12A9B0087DC5B /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795A22BD12A9B0087DC5B /* MockData.swift */; };
+		635795A52BD131640087DC5B /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795A42BD131640087DC5B /* RecordCollectionViewCell.swift */; };
+		635795A72BD1317E0087DC5B /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795A62BD1317E0087DC5B /* SettingsCollectionViewCell.swift */; };
+		635795A92BD131940087DC5B /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795A82BD131940087DC5B /* InfoCollectionViewCell.swift */; };
+		635795AD2BD13F780087DC5B /* HeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635795AC2BD13F780087DC5B /* HeaderSupplementaryView.swift */; };
 		6359AE882BC1975A00BAAFBE /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AE872BC1975A00BAAFBE /* StartView.swift */; };
 		6359AE902BC3AF4C00BAAFBE /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AE8F2BC3AF4C00BAAFBE /* DetailsView.swift */; };
 		6359AE922BC3DF7F00BAAFBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AE912BC3DF7F00BAAFBE /* Constants.swift */; };
@@ -22,7 +28,6 @@
 		6359AEAA2BCA801400BAAFBE /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AEA92BCA801400BAAFBE /* SplashViewController.swift */; };
 		6359AEAD2BCAAC3800BAAFBE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AEAC2BCAAC3800BAAFBE /* SignInViewController.swift */; };
 		6359AEAF2BCAACF700BAAFBE /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AEAE2BCAACF700BAAFBE /* SignInView.swift */; };
-		6359AEB12BCD650900BAAFBE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6359AEB02BCD650900BAAFBE /* ProfileView.swift */; };
 		63856F8F2BBD2F9800969D07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856F8E2BBD2F9800969D07 /* AppDelegate.swift */; };
 		63856F912BBD2F9800969D07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856F902BBD2F9800969D07 /* SceneDelegate.swift */; };
 		63856F932BBD2F9800969D07 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63856F922BBD2F9800969D07 /* StartViewController.swift */; };
@@ -46,6 +51,12 @@
 /* Begin PBXFileReference section */
 		635795982BCE79C50087DC5B /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		6357959A2BCE79E60087DC5B /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		6357959E2BD127E30087DC5B /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
+		635795A22BD12A9B0087DC5B /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		635795A42BD131640087DC5B /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		635795A62BD1317E0087DC5B /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
+		635795A82BD131940087DC5B /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		635795AC2BD13F780087DC5B /* HeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		6359AE872BC1975A00BAAFBE /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		6359AE8F2BC3AF4C00BAAFBE /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		6359AE912BC3DF7F00BAAFBE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -58,7 +69,6 @@
 		6359AEA92BCA801400BAAFBE /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		6359AEAC2BCAAC3800BAAFBE /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6359AEAE2BCAACF700BAAFBE /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		6359AEB02BCD650900BAAFBE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		63856F8B2BBD2F9800969D07 /* ShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63856F8E2BBD2F9800969D07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63856F902BBD2F9800969D07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +130,14 @@
 				6357959A2BCE79E60087DC5B /* EmailView.swift */,
 			);
 			path = Email;
+			sourceTree = "<group>";
+		};
+		635795AE2BD24B2B0087DC5B /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				635795AC2BD13F780087DC5B /* HeaderSupplementaryView.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		6359AE832BC15E6E00BAAFBE /* DetailsAboutTable */ = {
@@ -201,6 +219,7 @@
 				6359AE9B2BC9025C00BAAFBE /* Services */,
 				63856FE92BC12A5C00969D07 /* DTO */,
 				63856FA42BBD320B00969D07 /* Modules */,
+				635795AE2BD24B2B0087DC5B /* Header */,
 				63856FB82BBD378E00969D07 /* Helper */,
 				63856F9C2BBD2F9A00969D07 /* Info.plist */,
 			);
@@ -294,7 +313,11 @@
 			isa = PBXGroup;
 			children = (
 				63856FD52BBEDAD100969D07 /* ProfileViewController.swift */,
-				6359AEB02BCD650900BAAFBE /* ProfileView.swift */,
+				6357959E2BD127E30087DC5B /* ListSection.swift */,
+				635795A22BD12A9B0087DC5B /* MockData.swift */,
+				635795A42BD131640087DC5B /* RecordCollectionViewCell.swift */,
+				635795A62BD1317E0087DC5B /* SettingsCollectionViewCell.swift */,
+				635795A82BD131940087DC5B /* InfoCollectionViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -432,10 +455,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				63856FD62BBEDAD100969D07 /* ProfileViewController.swift in Sources */,
+				635795A52BD131640087DC5B /* RecordCollectionViewCell.swift in Sources */,
 				6359AE9D2BC902C400BAAFBE /* AuthService.swift in Sources */,
 				6359AEA02BC92CF100BAAFBE /* SMSCodeViewController.swift in Sources */,
 				6359AE922BC3DF7F00BAAFBE /* Constants.swift in Sources */,
 				63856FD32BBEDA7800969D07 /* BagViewController.swift in Sources */,
+				635795A92BD131940087DC5B /* InfoCollectionViewCell.swift in Sources */,
 				6359AE9A2BC8F12400BAAFBE /* ImageDownloader.swift in Sources */,
 				63856FE72BBFBAA600969D07 /* DetailslViewController.swift in Sources */,
 				6359AE882BC1975A00BAAFBE /* StartView.swift in Sources */,
@@ -443,7 +468,6 @@
 				6359AEAA2BCA801400BAAFBE /* SplashViewController.swift in Sources */,
 				63856F932BBD2F9800969D07 /* StartViewController.swift in Sources */,
 				63856FEF2BC1346C00969D07 /* MainViewController.swift in Sources */,
-				6359AEB12BCD650900BAAFBE /* ProfileView.swift in Sources */,
 				63856FCE2BBEB01500969D07 /* CustomTabBar.swift in Sources */,
 				6359AE902BC3AF4C00BAAFBE /* DetailsView.swift in Sources */,
 				63856FAC2BBD353000969D07 /* PhoneViewController.swift in Sources */,
@@ -452,6 +476,7 @@
 				6359AE942BC3E0A700BAAFBE /* NetworkLayer.swift in Sources */,
 				63856FC42BBD6BDD00969D07 /* CustomTableViewCell.swift in Sources */,
 				6359AEAF2BCAACF700BAAFBE /* SignInView.swift in Sources */,
+				635795AD2BD13F780087DC5B /* HeaderSupplementaryView.swift in Sources */,
 				6359AEAD2BCAAC3800BAAFBE /* SignInViewController.swift in Sources */,
 				63856F912BBD2F9800969D07 /* SceneDelegate.swift in Sources */,
 				63856FC92BBEADC300969D07 /* PlusButton.swift in Sources */,
@@ -459,7 +484,10 @@
 				63856FB02BBD357A00969D07 /* PhoneView.swift in Sources */,
 				63856FBA2BBD37AA00969D07 /* CustomUIColor.swift in Sources */,
 				6359AE962BC3E0F400BAAFBE /* Products.swift in Sources */,
+				6357959F2BD127E30087DC5B /* ListSection.swift in Sources */,
 				63856FD92BBEDD7500969D07 /* CompassViewController.swift in Sources */,
+				635795A72BD1317E0087DC5B /* SettingsCollectionViewCell.swift in Sources */,
+				635795A32BD12A9B0087DC5B /* MockData.swift in Sources */,
 				6357959B2BCE79E60087DC5B /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
