@@ -34,49 +34,40 @@ final class AuthService {
             }
             if let autchResult {
                 let currentDate = Date()
-               guard let oneMinLater = Calendar.current.date(byAdding: .second,
-                                                        value: 30,
-                                                        to: currentDate
-               ) else { return }
+                guard let oneMinLater = Calendar.current.date(byAdding: .second,
+                                                              value: 30,
+                                                              to: currentDate
+                ) else { return }
                 UserDefaults.standard.set(oneMinLater, forKey: "session")
                 completion(.success(autchResult))
             }
         }
-        func saveSession() {
-            let date = Date()
-            guard let oneMinLater = Calendar.current.date(
-                byAdding: .second,
-                value: 30,
-                to: date
-            ) else { return }
-            UserDefaults.standard.set(oneMinLater, forKey: "session")
-        }
     }
     
     func signIn(
-            with email: String,
-            password: String,
-            completion: @escaping (Result<Void, Error>) -> Void
-        ) {
-            Auth.auth().signIn(withEmail: email, password: password) { authDataResult, error in
-                if authDataResult != nil {
-                    self.saveSession()
-                    completion(.success(()))
-                }
-                if let error {
-                    completion(.failure(error))
-                    print(error.localizedDescription)
-                }
+        with email: String,
+        password: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        Auth.auth().signIn(withEmail: email, password: password) { authDataResult, error in
+            if authDataResult != nil {
+                self.saveSession()
+                completion(.success(()))
+            }
+            if let error {
+                completion(.failure(error))
+                print(error.localizedDescription)
             }
         }
-        
-        func saveSession() {
-            let date = Date()
-            guard let oneMinLater = Calendar.current.date(
-                byAdding: .second,
-                value: 30,
-                to: date
-            ) else { return }
-            UserDefaults.standard.set(oneMinLater, forKey: "session")
-        }
+    }
+    
+    func saveSession() {
+        let date = Date()
+        guard let oneMinLater = Calendar.current.date(
+            byAdding: .second,
+            value: 30,
+            to: date
+        ) else { return }
+        UserDefaults.standard.set(oneMinLater, forKey: "session")
+    }
 }

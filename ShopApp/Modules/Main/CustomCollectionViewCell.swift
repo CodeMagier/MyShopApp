@@ -4,13 +4,13 @@ import SnapKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     
-    static let CellID = "cell"
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         return label
     }()
+    
+    static let reuseId = String(describing: CustomCollectionViewCell.self)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,5 +44,4 @@ class CustomCollectionViewCell: UICollectionViewCell {
         titleLabel.text = catedory.title
 
     }
-    
 }

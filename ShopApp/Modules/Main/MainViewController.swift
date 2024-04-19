@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         var collection = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         collection.register(CustomCollectionViewCell.self,
-                            forCellWithReuseIdentifier: CustomCollectionViewCell.CellID)
+                            forCellWithReuseIdentifier: CustomCollectionViewCell.reuseId)
         collection.dataSource = self
         collection.delegate = self
         return collection
@@ -37,11 +37,10 @@ class MainViewController: UIViewController {
     private lazy var menuTableView: UITableView = {
         let view = UITableView()
         view.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 18, right: 0)
-    
         view.dataSource = self
         view.delegate = self
         view.register(CustomTableViewCell.self,
-                      forCellReuseIdentifier: CustomTableViewCell.SetupID)
+                      forCellReuseIdentifier: CustomTableViewCell.reuseId)
         return view
     }()
     
@@ -74,7 +73,6 @@ class MainViewController: UIViewController {
         selectedIndex = IndexPath(item: 0, section: 0)
         
     }
-
     
     private func setupConstreints() {
         
@@ -148,7 +146,6 @@ class MainViewController: UIViewController {
         }
         menuTableView.reloadData()
     }
-
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -159,7 +156,7 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.CellID,
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reuseId,
                                                       for: indexPath) as! CustomCollectionViewCell
         cell.backgroundColor = indexPath == selectedIndex ? .purple : .clear
         cell.layer.cornerRadius = 16
@@ -170,6 +167,7 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 extension MainViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         titleLabel.text = categories[indexPath.row].title
@@ -177,9 +175,8 @@ extension MainViewController: UICollectionViewDelegate {
         selectedIndex = indexPath
         let category = categories[indexPath.row]
         selectedCategory = category
-        
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView,
                         didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CustomCollectionViewCell {
@@ -204,7 +201,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.SetupID,
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseId,
                                                  for: indexPath) as? CustomTableViewCell
         let product = filteredProducts[indexPath.row]
         cell?.fill(with: product)

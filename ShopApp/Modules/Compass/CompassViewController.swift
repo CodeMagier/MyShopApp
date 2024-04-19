@@ -7,7 +7,6 @@ class CompassViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         self.navigationItem.title = "Профиль"
+        
     }
-    
-
 }

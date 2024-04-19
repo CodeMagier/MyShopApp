@@ -5,7 +5,7 @@ import SnapKit
 protocol EmailDelegate {
     
     func getEmail(email: String, password: String)
-
+    
 }
 
 class EmailView: UIView {
@@ -41,6 +41,15 @@ class EmailView: UIView {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
         tf.leftView = view
         tf.leftViewMode = .always
+        let rigthView = UIButton()
+        let rightContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 46, height: 46))
+        let rightView = UIButton(type: .system)
+        rightView.frame = CGRect(x: 3, y: 13, width: 34, height: 20)
+        rightView.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        rightContainerView.addSubview(rightView)
+        tf.rightView = rightContainerView
+        tf.isSecureTextEntry = true
+        tf.rightViewMode = .always
         return tf
     }()
     
@@ -65,7 +74,7 @@ class EmailView: UIView {
     var didButtonTapped: (() -> Void)?
     
     var delegate: EmailDelegate?
-     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -99,7 +108,7 @@ class EmailView: UIView {
             make.top.equalTo(emailTextField.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(emailTextField)
             make.height.equalTo(emailTextField)
-        
+            
         }
         
         addSubview(passwordLabel)
@@ -123,7 +132,6 @@ class EmailView: UIView {
     
 }
 
-
 extension EmailView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -134,15 +142,15 @@ extension EmailView: UITextFieldDelegate {
                 self.emailLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 self.emailLabel.frame.origin = CGPoint(x: self.emailTextField.frame.origin.x + 50,
                                                        y: self.emailTextField.frame.minY - self.emailLabel.frame.height / 2)
-               }
-            } else if textField == passwordTextField {
-                emailLabel.layer.anchorPoint = CGPoint(x: 0.8, y: 0.6)
-                UIView.animate(withDuration: 0.1) {
-                    self.passwordLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                    self.passwordLabel.frame.origin = CGPoint(x: self.passwordTextField.frame.origin.x + 20,
-                                                              y: self.passwordTextField.frame.minY - self.passwordLabel.frame.height / 2)
-                }
+            }
+        } else if textField == passwordTextField {
+            emailLabel.layer.anchorPoint = CGPoint(x: 0.8, y: 0.6)
+            UIView.animate(withDuration: 0.1) {
+                self.passwordLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                self.passwordLabel.frame.origin = CGPoint(x: self.passwordTextField.frame.origin.x + 20,
+                                                          y: self.passwordTextField.frame.minY - self.passwordLabel.frame.height / 2)
             }
         }
     }
+}
 

@@ -3,8 +3,8 @@ import UIKit
 import SnapKit
 
 class DetailslViewController: UIViewController {
-        
-   private let detailsView = DetailsView(frame: .zero)
+    
+    private let detailsView = DetailsView(frame: .zero)
     
     var idMeal: String!
     
@@ -14,11 +14,11 @@ class DetailslViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         loadMealDetails(idMeal: idMeal)
-        setup()
+        setupConstraints()
         
     }
- 
-    private func setup() {
+    
+    private func setupConstraints() {
         
         view.addSubview(detailsView)
         detailsView.snp.makeConstraints { make in

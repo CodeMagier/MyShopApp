@@ -39,6 +39,8 @@ class CustomTabBarController: UITabBarController {
         let bagVC = BagViewController()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
+        let middleVC = UIViewController()
+        
     
         let compassVC = CompassViewController()
         compassVC.tabBarItem.image = UIImage(systemName: "location")
@@ -46,7 +48,7 @@ class CustomTabBarController: UITabBarController {
         let profileVC = ProfileViewController()
         profileVC.tabBarItem.image = UIImage(systemName: "person")
         
-        setViewControllers([mainVC, bagVC, compassVC, profileVC], animated: false)
+        setViewControllers([mainVC, bagVC, middleVC, compassVC, profileVC], animated: false)
     }
     
     private func setupPlusButtonAction() {

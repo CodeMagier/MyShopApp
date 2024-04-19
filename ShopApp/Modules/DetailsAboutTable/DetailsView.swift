@@ -101,7 +101,6 @@ class DetailsView: UIView {
         addSubview(scrollView)
         
         scrollView.addSubview(contentView)
-        
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
