@@ -13,7 +13,7 @@ class HeaderSupplementaryView: UICollectionReusableView {
         return label
     }()
     
-    static let CellID = "HeaderSupplementaryView"
+    static let reuseId = String(describing: HeaderSupplementaryView.self)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
