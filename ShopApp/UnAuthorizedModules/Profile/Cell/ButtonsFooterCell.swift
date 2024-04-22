@@ -40,14 +40,14 @@ class ButtonsFooterCell: UICollectionViewCell {
     private func setupConstraints() {
        
         addSubview(exitButton)
-        addSubview(versionLabel)
         
         exitButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
-    
+        
+        addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
