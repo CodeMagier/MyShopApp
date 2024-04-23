@@ -23,7 +23,7 @@ struct MockData {
     private let info: ListSection = {
         ListSection.info( "Information",
         [
-            ListSection.ListItem(title: "Arequent questions", image: "стрелка"),
+            ListSection.ListItem(title: "Frequent questions", image: "стрелка"),
             ListSection.ListItem(title: "How the system works", image: "стрелка"),
             ListSection.ListItem(title: "User agreements", image: "стрелка"),
             ListSection.ListItem(title: "Privacy policy", image: "стрелка")])

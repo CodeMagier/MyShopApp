@@ -6,8 +6,11 @@ class InfoCollectionViewCell: UICollectionViewCell {
     
     private let titleView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .none
         view.layer.cornerRadius = 18
+        view.layer.borderColor = UIColor.cyan.cgColor
+        view.layer.borderWidth = 1.5
+        //view.backgroundColor = .cyan
         return view
     }()
     
@@ -22,6 +25,7 @@ class InfoCollectionViewCell: UICollectionViewCell {
     private let recordImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        //image.backgroundColor = .cyan
         return image
     }()
     

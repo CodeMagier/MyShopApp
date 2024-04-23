@@ -9,11 +9,12 @@ class CustomTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.tintColor = .cyan
         setValue(customTabBar, forKey: "tabBar")
         setupNavigtionItem()
         setupTabItem()
         setupPlusButtonAction()
+        
      
     }
     
@@ -34,14 +35,12 @@ class CustomTabBarController: UITabBarController {
         
         let mainVC = MainViewController()
         mainVC.tabBarItem.image = UIImage(systemName: "house")
-        
-        
+    
         let bagVC = BagViewController()
         bagVC.tabBarItem.image = UIImage(systemName: "bag")
         
         let middleVC = UIViewController()
         
-    
         let compassVC = CompassViewController()
         compassVC.tabBarItem.image = UIImage(systemName: "location")
         

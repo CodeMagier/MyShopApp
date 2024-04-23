@@ -52,14 +52,18 @@ struct Meal: Codable {
 
 //----------------------------------
 
-struct Searchs: Codable {
+struct Paginations: Codable {
     
-    let searchs: [Search]
+    let products: [Pagination]
 }
 
-struct Search: Codable {
-    
-    let idMeal: String
-    let strMeal: String
+struct Pagination: Codable {
+  
+    let title: String
+    let thumbnail: String
+    let brand: String
+    let price: Int
     
 }
+
+

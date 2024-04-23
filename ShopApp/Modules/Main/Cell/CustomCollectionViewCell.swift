@@ -21,7 +21,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         updateAppearance(isSelected: false)
     }
-
+    
     private func setupLabel() {
         contentView.addSubview(titleLabel)
         
@@ -33,7 +33,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     func updateAppearance(isSelected: Bool) {
         
-        }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,6 +42,5 @@ class CustomCollectionViewCell: UICollectionViewCell {
     func setup(catedory: Category) {
         
         titleLabel.text = catedory.title
-
     }
 }

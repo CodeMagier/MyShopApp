@@ -24,7 +24,7 @@ final class PlusButton: UIButton {
        // setImage(UIImage(resource: .qr), for: .normal)
         setImage(UIImage(systemName: "qrcode"), for: .normal)
         tintColor = .white
-        backgroundColor = .red
+        backgroundColor = .purple
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 0,

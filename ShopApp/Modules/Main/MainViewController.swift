@@ -41,6 +41,14 @@ class MainViewController: UIViewController {
         view.delegate = self
         view.register(CustomTableViewCell.self,
                       forCellReuseIdentifier: CustomTableViewCell.reuseId)
+        view.refreshControl = refreshControl
+        return view
+    }()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let view = UIRefreshControl()
+        view.attributedTitle = NSAttributedString(string: "Loading...")
+        view.addTarget(self, action: #selector(refreshProduct), for: .valueChanged)
         return view
     }()
     
@@ -61,6 +69,18 @@ class MainViewController: UIViewController {
     private var selectedIndex: IndexPath? {
         didSet {
             horizontalCollectionView.reloadData()
+        }
+    }
+    
+    private var isLoading = false {
+        didSet {
+            DispatchQueue.main.async {
+                _ = self.isLoading                         // if isLoading {
+                ? self.refreshControl.beginRefreshing()    // refreshControl.beginRefreshing()
+                : self.refreshControl.endRefreshing()      // } else {
+                                                           // refreshControl.endRefreshing()
+                                                           //  }
+            }
         }
     }
     
@@ -105,7 +125,10 @@ class MainViewController: UIViewController {
     }
     
     private func fetchCategorys() {
-        netWorkLayer.fetchCategorys { result in
+        isLoading = true
+        netWorkLayer.fetchCategorys { [ weak self ] result in
+            guard let self else { return }
+            isLoading = false
             switch result {
             case .success(let categorys):
                 DispatchQueue.main.async {
@@ -120,7 +143,10 @@ class MainViewController: UIViewController {
     }
     
     private func fetchProducts(by category: Category) {
-        netWorkLayer.fetchProducts(by: category.title) { result in
+        isLoading = true
+        netWorkLayer.fetchProducts(by: category.title) { [ weak self ] result in
+            guard let self else { return }
+            isLoading = false
             switch result {
             case .success(let products):
                 DispatchQueue.main.async {
@@ -145,6 +171,13 @@ class MainViewController: UIViewController {
             return product.strMeal.lowercased().contains(searchText.lowercased())
         }
         menuTableView.reloadData()
+    }
+    
+    @objc
+    private func refreshProduct() {
+        if let selectedCategory {
+            fetchProducts(by: selectedCategory)
+        }
     }
 }
 
@@ -202,11 +235,11 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseId,
-                                                 for: indexPath) as? CustomTableViewCell
+                                                 for: indexPath) as! CustomTableViewCell
         let product = filteredProducts[indexPath.row]
-        cell?.fill(with: product)
-        cell?.configure(with: product, tableView: tableView)
-        return cell!
+        cell.fill(with: product)
+        cell.configure(with: product, tableView: tableView)
+        return cell
     }
 }
 

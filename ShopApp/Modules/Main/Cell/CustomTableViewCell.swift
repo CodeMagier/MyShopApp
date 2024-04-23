@@ -28,6 +28,19 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 14, weight: .light)
+        return label
+    }()
+    
+    private lazy var preisLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .orange
+        return label
+    }()
+    
     private lazy var addToCartButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
@@ -126,6 +139,19 @@ class CustomTableViewCell: UITableViewCell {
         }
     }
     
+    func fill(with item: Pagination) {
+        titleLabel.text = item.title
+        descriptionLabel.text = item.brand
+        preisLabel.text = String("\(item.price)$")
+        ImageDownloader.shared.loadImage(from: item.thumbnail) { result in
+            if case .success(let image) = result {
+                DispatchQueue.main.async {
+                    self.productImage.image = image
+                }
+            }
+        }
+    }
+    
     private func setupConstraints() {
         
         addSubview(productImage)
@@ -138,6 +164,8 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(descriptionLabel)
+        stackView.addArrangedSubview(preisLabel)
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

@@ -49,7 +49,9 @@ struct NetworkLayer {
                     do {
                         let model = try decoder.decode(Products.self,
                                                        from: data)
+                    
                         completion(.success(model.meals))
+                        sleep(2)
                     } catch {
                         completion(.failure(error))
                     }
@@ -84,6 +86,41 @@ struct NetworkLayer {
                 }
             } catch {
                 completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func fetchProductsPagination(
+        with page: Int,
+        limit: Int,
+        completion: @escaping (
+            Result<[Pagination], Error>) -> Void
+    ) {
+        let url = URL(string: "https://dummyjson.com/products")!
+        var components = URLComponents(
+            url: url,
+            resolvingAgainstBaseURL: true)
+        components?.queryItems = [
+            URLQueryItem(name: "limit", value: String(page * limit)),
+            URLQueryItem(name: "skip", value: String(limit))
+        ]
+        guard let url = components?.url else { return }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error {
+                completion(.failure(error))
+                return
+            }
+            
+            if let data {
+                do {
+                    let product = try self.decoder.decode(Paginations.self, from: data)
+                    completion(.success(product.products))
+                } catch {
+                    completion(.failure(error))
+                    return
+                }
             }
         }.resume()
     }
