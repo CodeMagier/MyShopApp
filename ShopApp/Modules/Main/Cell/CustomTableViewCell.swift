@@ -124,7 +124,6 @@ class CustomTableViewCell: UITableViewCell {
         } completion: {_ in
             self.addToCartButton.animationZoom(scaleX: 1.0, y: 1.0)
         }
-        
     }
     
     func fill(with item: Product) {
